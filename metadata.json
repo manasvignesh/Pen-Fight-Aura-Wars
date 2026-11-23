@@ -1,0 +1,6 @@
+{
+  "name": "Pen Fight Aura Wars",
+  "description": "Official website for Pen Fight Aura Wars on Android — physics-based classroom desk pen battles, collectible pens, official downloads, privacy policy, account deletion, and player support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

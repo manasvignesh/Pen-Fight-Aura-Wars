@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    background-color: #090b10;
+    color: #f1f5f9;
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+}
+
+/* Subtle desk surface texture overlay without distracting glow or clutter */
+.desk-grain-surface {
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.08), transparent 45%),
+    radial-gradient(circle at 85% 10%, rgba(234, 179, 8, 0.06), transparent 40%),
+    linear-gradient(180deg, #0d1017 0%, #090b10 100%);
+}
+
+@keyframes auraDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 0.58;
+  }
+}
+
+.aura-particle {
+  animation: auraDrift 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-particle {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
