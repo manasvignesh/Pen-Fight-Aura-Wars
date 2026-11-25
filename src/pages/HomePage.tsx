@@ -1,4 +1,4 @@
-import { ArrowRight, Swords, Trophy, Wrench } from 'lucide-react';
+import { ArrowRight, CalendarDays, Swords, Trophy, UsersRound } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { DownloadButtons } from '../components/DownloadButtons';
@@ -8,11 +8,25 @@ import { siteConfig } from '../config/siteConfig';
 import { HERO_KEY_ART } from '../data/gameContent';
 
 const modes = [
-  { icon: Trophy, title: 'Tournament', description: 'Climb a 24-opponent ladder. Earn Aura Points, unlock six pens, and upgrade their grip and nib in the Garage.' },
-  { icon: Swords, title: 'Ranked 1v1', description: siteConfig.features.onlineMultiplayerLive
-    ? 'Pick a pen you own and face another player online. Rated wins improve your Aura Rating, and every pen uses equal physics.'
-    : 'Online ranked matchmaking is currently unavailable. You can play Tournament or Pass & Play offline.' },
-  { icon: Wrench, title: 'Weekly Tournament', description: 'Beat three rivals for 2,500 Aura Points. Win all three 2–0 to earn 750 more with Clean Sweep.' },
+  {
+    icon: Trophy, title: 'Tournament', label: 'Solo · Offline', accent: 'text-amber-300', glow: 'from-amber-400/15',
+    detail: '24 rivals', description: 'Climb the ladder, earn Aura Points, and unlock pens for tougher matches.',
+  },
+  {
+    icon: Swords, title: 'Ranked 1v1', label: 'Online', accent: 'text-sky-300', glow: 'from-sky-400/15',
+    detail: siteConfig.features.onlineMultiplayerLive ? 'Aura Rating' : 'Currently unavailable',
+    description: siteConfig.features.onlineMultiplayerLive
+      ? 'Bring a pen you own and challenge another player. Both pens use equal physics.'
+      : 'Play Tournament or Pass & Play while ranked matchmaking is unavailable.',
+  },
+  {
+    icon: CalendarDays, title: 'Weekly Tournament', label: 'Solo · Weekly', accent: 'text-emerald-300', glow: 'from-emerald-400/15',
+    detail: '2,500 Aura Points', description: 'Clear three rivals. Win all three matches 2–0 for a 750-point Clean Sweep bonus.',
+  },
+  {
+    icon: UsersRound, title: 'Pass & Play', label: 'Local · Offline', accent: 'text-violet-300', glow: 'from-violet-400/15',
+    detail: 'One phone', description: 'Take turns flicking against a friend on the same device.',
+  },
 ];
 
 export function HomePage() {
@@ -50,19 +64,24 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="features" aria-labelledby="features-heading" className="desk-grain-surface scroll-mt-16 py-14 sm:py-20">
+      <section id="features" aria-labelledby="features-heading" className="desk-grain-surface scroll-mt-20 border-b border-white/10 py-14 sm:py-20">
         <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-          <h2 id="features-heading" className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">Pick your fight</h2>
-          <div className="mt-6 grid gap-3 md:grid-cols-3">
-            {modes.map(({ icon: Icon, title, description }) => (
-              <article key={title} className="rounded-xl border border-white/10 bg-[#11151F] p-5">
-                <Icon className="size-5 text-amber-300" aria-hidden="true" />
-                <h3 className="mt-3 font-display text-xl font-bold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">{description}</p>
+          <h2 id="features-heading" className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">Pick your fight</h2>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:gap-4">
+            {modes.map(({ icon: Icon, title, label, accent, glow, detail, description }) => (
+              <article key={title} className={`relative isolate flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#101620] px-5 py-5 sm:px-6 sm:py-6 ${accent}`}>
+                <div className={`pointer-events-none absolute inset-0 -z-10 bg-linear-to-bl ${glow} via-transparent to-transparent`} aria-hidden="true" />
+                <Icon className="pointer-events-none absolute -top-2 right-0 -z-10 size-28 rotate-12 opacity-[0.07] sm:size-36" strokeWidth={1.1} aria-hidden="true" />
+                <div className="flex items-center gap-2">
+                  <Icon className="size-4 shrink-0" aria-hidden="true" />
+                  <span className="text-xs font-semibold tracking-wide">{label}</span>
+                </div>
+                <h3 className="mt-2 font-display text-3xl font-bold leading-none text-white sm:text-4xl">{title}</h3>
+                <p className="mb-4 mt-3 max-w-sm text-sm leading-relaxed text-slate-300">{description}</p>
+                <p className="mt-auto border-t border-white/10 pt-3 text-sm font-bold">{detail}</p>
               </article>
             ))}
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-slate-300"><strong className="text-white">On the same phone?</strong> Play offline with a friend in Pass &amp; Play.</p>
         </div>
       </section>
 
