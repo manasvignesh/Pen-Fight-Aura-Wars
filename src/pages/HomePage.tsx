@@ -64,29 +64,31 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="features" aria-labelledby="features-heading" className="desk-grain-surface scroll-mt-20 border-b border-white/10 py-14 sm:py-20">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-          <h2 id="features-heading" className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">Pick your fight</h2>
-          <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:gap-4">
-            {modes.map(({ icon: Icon, title, label, accent, glow, detail, description }) => (
-              <article key={title} className={`relative isolate flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#101620] px-5 py-5 sm:px-6 sm:py-6 ${accent}`}>
-                <div className={`pointer-events-none absolute inset-0 -z-10 bg-linear-to-bl ${glow} via-transparent to-transparent`} aria-hidden="true" />
-                <Icon className="pointer-events-none absolute -top-2 right-0 -z-10 size-28 rotate-12 opacity-[0.07] sm:size-36" strokeWidth={1.1} aria-hidden="true" />
-                <div className="flex items-center gap-2">
-                  <Icon className="size-4 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-semibold tracking-wide">{label}</span>
-                </div>
-                <h3 className="mt-2 font-display text-3xl font-bold leading-none text-white sm:text-4xl">{title}</h3>
-                <p className="mb-4 mt-3 max-w-sm text-sm leading-relaxed text-slate-300">{description}</p>
-                <p className="mt-auto border-t border-white/10 pt-3 text-sm font-bold">{detail}</p>
-              </article>
-            ))}
+      <div className="classroom-gutters">
+        <section id="features" aria-labelledby="features-heading" className="desk-grain-surface scroll-mt-20 border-b border-white/10 py-14 sm:py-20">
+          <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+            <h2 id="features-heading" className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">Pick your fight</h2>
+            <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:gap-4">
+              {modes.map(({ icon: Icon, title, label, accent, glow, detail, description }) => (
+                <article key={title} className={`relative isolate flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#101620] px-5 py-5 sm:px-6 sm:py-6 ${accent}`}>
+                  <div className={`pointer-events-none absolute inset-0 -z-10 bg-linear-to-bl ${glow} via-transparent to-transparent`} aria-hidden="true" />
+                  <Icon className="pointer-events-none absolute -top-2 right-0 -z-10 size-28 rotate-12 opacity-[0.07] sm:size-36" strokeWidth={1.1} aria-hidden="true" />
+                  <div className="flex items-center gap-2">
+                    <Icon className="size-4 shrink-0" aria-hidden="true" />
+                    <span className="text-xs font-semibold tracking-wide">{label}</span>
+                  </div>
+                  <h3 className="mt-2 font-display text-3xl font-bold leading-none text-white sm:text-4xl">{title}</h3>
+                  <p className="mb-4 mt-3 max-w-sm text-sm leading-relaxed text-slate-300">{description}</p>
+                  <p className="mt-auto border-t border-white/10 pt-3 text-sm font-bold">{detail}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <GameplayShowcase />
-      <PenShowcase />
+        <GameplayShowcase />
+        <PenShowcase />
+      </div>
 
       <section className="border-t border-white/10 bg-[#090B10] px-5 py-12 sm:px-8">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4">

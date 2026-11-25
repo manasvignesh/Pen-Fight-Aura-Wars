@@ -58,3 +58,28 @@
     scroll-behavior: auto;
   }
 }
+
+/* The worn bench fades out before reaching the homepage content column. */
+@media (min-width: 80rem) {
+  .classroom-gutters {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .classroom-gutters::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.22;
+    background: url("./assets/images/classroom-bench.webp") center top / 100% auto repeat-y;
+    mask-image: linear-gradient(
+      to right,
+      black,
+      transparent calc(50% - 35.5rem),
+      transparent calc(50% + 35.5rem),
+      black
+    );
+  }
+}
