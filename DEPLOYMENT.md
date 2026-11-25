@@ -11,7 +11,7 @@ Connect your Git repository in the Cloudflare Dashboard (**Workers & Pages → C
 - **Build output directory**: `dist`
 - **Node.js version** (Environment variable): `NODE_VERSION=20`
 
-Client-side routing for `/download`, `/privacy`, `/delete-account`, `/support`, and `/terms` is handled automatically by `public/_redirects` (`/* /index.html 200`). Static root files in `public/` — including `/app-ads.txt`, `/robots.txt`, `/sitemap.xml`, and `/favicon.svg` — are served directly by Cloudflare Pages without passing through React.
+Use the hosting service's SPA fallback for `/download`, `/privacy`, `/delete-account`, `/support`, and `/terms`. Serve `app-ads.txt`, the generated robots and sitemap files, and downloadable assets directly from the build output.
 
 ## 2. Public Environment Variables (Cloudflare Pages → Settings → Environment Variables)
 
@@ -19,18 +19,18 @@ Only public, non-secret values should be stored in `VITE_*` variables. **Never**
 
 | Variable | Example Value | Purpose |
 | --- | --- | --- |
-| `VITE_SITE_URL` | `https://penfightaurawars.com` | Canonical URL & Open Graph `og:url` |
+| `VITE_SITE_URL` | `https://penfightaurawars.com` | Actual public HTTPS origin for canonical and social URLs and for sitemap generation |
 | `VITE_PUBLISHER_NAME` | `Your Studio or Developer Name` | Footer copyright & legal publisher identity |
 | `VITE_SUPPORT_EMAIL` | `support@yourdomain.com` | Support & account deletion `mailto:` address |
 | `VITE_PLAY_STORE_LIVE` | `false` or `true` | Switches Google Play CTA from "Coming Soon" to live link |
 | `VITE_PLAY_STORE_URL` | `https://play.google.com/store/apps/details?id=com.penfightroyale.game` | Official Play Store URL |
 | `VITE_APK_URL` | `https://downloads.yourdomain.com/pen-fight-aura-wars-1.0.0-release.apk` | Trusted HTTPS URL or `/downloads/*.apk` (never `.aab`, debug, or unsigned) |
 | `VITE_APK_VERSION` | `1.0.0` | Displayed release version |
-| `VITE_APK_RELEASE_DATE` | `2026-05-01` | Release date displayed on `/download` |
+| `VITE_APK_RELEASE_DATE` | `2026-05-01` | Optional date for a hosted APK override |
 | `VITE_APK_FILE_SIZE` | `42 MB` | Approximate signed APK size |
 | `VITE_APK_SHA256` | `<64-char hex digest>` | Exact SHA-256 verification hash of the signed release APK |
-| `VITE_MIN_ANDROID_VERSION` | `Android 8.0 (API 26)` | Confirmed from Android `minSdk` in `build.gradle` |
-| `VITE_ONLINE_MULTIPLAYER_LIVE` | `false` or `true` | Controls Online 1v1 "Coming Soon" vs. live description |
+| `VITE_MIN_ANDROID_VERSION` | `Android 7.0 (API 24)` | Confirmed from Android `minSdk` in `build.gradle` |
+| `VITE_ONLINE_MULTIPLAYER_LIVE` | `false` or `true` | Override Online 1v1 availability (enabled by default) |
 | `VITE_LEGAL_EFFECTIVE_DATE` | `May 1, 2026` | Effective date shown on `/privacy` and `/terms` |
 | `VITE_LEGAL_LAST_UPDATED` | `May 1, 2026` | Last updated date shown on `/privacy` and `/terms` |
 | `VITE_DELETION_TIMEFRAME` | `Within 14 days of email verification` | Account deletion SLA shown on `/delete-account` |
@@ -42,9 +42,8 @@ After updating any `VITE_*` variable in Cloudflare Pages, trigger a fresh deploy
 
 1. In Cloudflare Pages, open your project → **Custom domains** → **Set up a custom domain** (e.g., `penfightaurawars.com`).
 2. Add the recommended CNAME / DNS record in Cloudflare DNS (SSL/TLS HTTPS activates automatically).
-3. Update `public/sitemap.xml` by replacing `https://YOUR-DOMAIN` with your actual custom domain.
-4. Set `VITE_SITE_URL` to your exact HTTPS custom domain.
-5. Verify your AdMob file directly in a browser or via `curl`:
+3. Set `VITE_SITE_URL` to the official HTTPS origin. The build generates the sitemap and adds its absolute URL to `robots.txt`.
+4. Verify your AdMob file directly in a browser or via `curl`:
    ```bash
    curl -i https://YOUR-DOMAIN/app-ads.txt
    ```
@@ -52,9 +51,11 @@ After updating any `VITE_*` variable in Cloudflare Pages, trigger a fresh deploy
    ```text
    google.com, pub-9403523388888787, DIRECT, f08c47fec0942fa0
    ```
-6. Enter `https://YOUR-DOMAIN` as your **Developer Website** in Google Play Console (**Store Settings**) so Google AdMob crawls `https://YOUR-DOMAIN/app-ads.txt`.
+5. Enter the official origin as your **Developer Website** in Google Play Console so AdMob can find `/app-ads.txt`.
 
 ## 4. Updating the Official Signed Release APK
+
+The included version is configured in src/config/bundledApk.ts. Replace the bundled file in public/downloads/ and update its metadata together, or set all the override variables below.
 
 1. Build and sign your release APK using your production release keystore (never use `.aab`, debug, or unsigned builds for direct APK downloads).
 2. Compute the exact SHA-256 hash:
@@ -72,9 +73,9 @@ After updating any `VITE_*` variable in Cloudflare Pages, trigger a fresh deploy
 2. Set `VITE_PLAY_STORE_LIVE=true` and confirm `VITE_PLAY_STORE_URL=https://play.google.com/store/apps/details?id=com.penfightroyale.game`.
 3. Redeploy on Cloudflare Pages.
 
-## 6. Editing Legal Documents & Replacing Gameplay Placeholders
+## 6. Updating Legal Documents and Gameplay Media
 
 - **Privacy Policy**: Edit `src/pages/PrivacyPage.tsx` (remove `[Developer note: ...]` confirmation tags after verifying each item against your production SDKs and Google Play Data Safety declarations).
 - **Account Deletion**: Edit `src/pages/DeleteAccountPage.tsx`.
 - **Terms of Service**: Edit `src/pages/TermsPage.tsx`.
-- **Gameplay Screenshots**: Place verified Android captures in `public/media/` (matching filenames listed in `src/data/gameContent.ts`) and update `src/components/GameplayShowcase.tsx` to render `<img>` tags once authentic captures are ready.
+- **Gameplay media**: Store real game captures in public/media/ and update GameplayShowcase.tsx when the list changes.

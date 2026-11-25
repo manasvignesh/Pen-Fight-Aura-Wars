@@ -6,6 +6,7 @@ import {
   type PlayStoreActionState,
   type ValidatedApkConfig,
 } from '../utils/validation';
+import { bundledApk } from './bundledApk';
 
 const env = import.meta.env;
 
@@ -16,6 +17,7 @@ const configuredSupportEmail = cleanEnvString(env.VITE_SUPPORT_EMAIL);
 const configuredPublisherName = cleanEnvString(env.VITE_PUBLISHER_NAME);
 const configuredSiteUrl = cleanEnvString(env.VITE_SITE_URL);
 const configuredTrailerUrl = cleanEnvString(env.VITE_TRAILER_URL);
+const apkOverride = cleanEnvString(env.VITE_APK_URL);
 
 export interface SiteConfig {
   appName: string;
@@ -57,16 +59,16 @@ export const siteConfig: SiteConfig = {
     url: env.VITE_PLAY_STORE_URL,
     packageName: PACKAGE_NAME,
   }),
-  apk: validateApkDownloadConfig({
-    url: env.VITE_APK_URL,
+  apk: validateApkDownloadConfig(apkOverride ? {
+    url: apkOverride,
     version: env.VITE_APK_VERSION,
     releaseDate: env.VITE_APK_RELEASE_DATE,
     fileSize: env.VITE_APK_FILE_SIZE,
     sha256: env.VITE_APK_SHA256,
     minAndroidVersion: env.VITE_MIN_ANDROID_VERSION,
-  }),
+  } : bundledApk),
   features: {
-    onlineMultiplayerLive: cleanEnvString(env.VITE_ONLINE_MULTIPLAYER_LIVE)?.toLowerCase() === 'true',
+    onlineMultiplayerLive: cleanEnvString(env.VITE_ONLINE_MULTIPLAYER_LIVE)?.toLowerCase() !== 'false',
   },
   media: {
     trailerUrl: configuredTrailerUrl && isSafeHttpsUrl(configuredTrailerUrl) ? configuredTrailerUrl : null,

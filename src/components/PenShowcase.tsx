@@ -8,7 +8,7 @@ export function PenShowcase() {
     COLLECTIBLE_PENS.find((pen) => pen.id === selectedPenId) ?? COLLECTIBLE_PENS[0];
 
   return (
-    <section id="pens" aria-labelledby="pens-heading" className="border-t border-white/[0.08] py-20 sm:py-24">
+    <section id="pens" aria-labelledby="pens-heading" className="scroll-mt-16 border-t border-white/[0.08] py-20 sm:py-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-sm font-medium text-[#EAB308]">Collectible Arsenal</p>
@@ -19,7 +19,7 @@ export function PenShowcase() {
             Six Distinct Classroom Pens
           </h2>
           <p className="mt-3 text-base leading-relaxed text-[#B4BCCE]">
-            Each pen brings its own mass, barrel geometry, and desk-handling character. Unlock pens through coins, gameplay progression, and supported in-game achievements as they roll out.
+            Earn Aura Points and defeat Tournament rivals to unlock pens. Upgrade their grip or nib in the Garage to change how they handle in Tournament.
           </p>
         </div>
 

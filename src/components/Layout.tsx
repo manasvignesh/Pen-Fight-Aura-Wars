@@ -62,7 +62,7 @@ export function Layout({ meta, children }: LayoutProps) {
       const id = location.hash.slice(1);
       const target = document.getElementById(id);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
         return;
       }
     }

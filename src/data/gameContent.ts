@@ -12,15 +12,6 @@ export interface CollectiblePen {
   };
 }
 
-export interface GameplayPlaceholderSlot {
-  id: string;
-  title: string;
-  category: string;
-  aspect: '16:9' | '9:16';
-  captureBrief: string;
-  recommendedFilename: string;
-}
-
 export interface SupportFaqItem {
   id: string;
   question: string;
@@ -28,9 +19,8 @@ export interface SupportFaqItem {
   category: string;
 }
 
-export const HERO_KEY_ART = '/src/assets/images/hero_desk_clash_1795434220411.jpg';
-export const PEN_LINEUP_ART = '/src/assets/images/pen_arsenal_lineup_1795434225842.jpg';
-export const DESK_MECHANICS_ART = '/src/assets/images/desk_arena_mechanics_1795434216065.jpg';
+export { default as HERO_KEY_ART } from '../assets/images/hero.webp';
+export { default as PEN_LINEUP_ART } from '../assets/images/pen-lineup.webp';
 
 export const COLLECTIBLE_PENS: CollectiblePen[] = [
   {
@@ -54,7 +44,7 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#60A5FA',
     handlingSummary:
       'Smooth metallic barrel with low desk friction for crisp linear velocity, rapid recovery flicks, and clean angular snipes.',
-    unlockPath: 'Unlocked through in-game coins and progression milestones.',
+    unlockPath: 'Unlocked through Aura Points and progression milestones.',
     attributes: {
       weight: 60,
       control: 88,
@@ -68,7 +58,7 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#A3E635',
     handlingSummary:
       'Broad flat silhouette creates a wide collision contact zone, ideal for pushing opponents off the desk in tight corners.',
-    unlockPath: 'Unlocked through in-game coins and gameplay progression.',
+    unlockPath: 'Unlocked through Aura Points and gameplay progression.',
     attributes: {
       weight: 72,
       control: 68,
@@ -82,7 +72,7 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#F97316',
     handlingSummary:
       'High-mass barrel that resists knockback from light flicks and transfers heavy momentum on direct center-mass collisions.',
-    unlockPath: 'Unlocked through coins and competitive tournament progress.',
+    unlockPath: 'Unlocked through Aura Points and competitive tournament progress.',
     attributes: {
       weight: 92,
       control: 58,
@@ -96,7 +86,7 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#8B5CF6',
     handlingSummary:
       'Center-weighted body engineered for whipping rotational strikes and curving off-center deflections around blocking pens.',
-    unlockPath: 'Unlocked through coins, gameplay progression, and supported achievements.',
+    unlockPath: 'Unlocked through Aura Points, gameplay progression, and supported achievements.',
     attributes: {
       weight: 66,
       control: 90,
@@ -110,69 +100,12 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#EAB308',
     handlingSummary:
       'Dense championship-grade metallic balance combining decisive knockout power with steady, authoritative desk control.',
-    unlockPath: 'Unlocked through sustained coin savings, progression milestones, and supported achievements.',
+    unlockPath: 'Unlocked through sustained Aura Points, progression milestones, and supported achievements.',
     attributes: {
       weight: 84,
       control: 86,
       impact: 90,
     },
-  },
-];
-
-export const GAMEPLAY_PLACEHOLDER_SLOTS: GameplayPlaceholderSlot[] = [
-  {
-    id: 'tournament-gameplay',
-    title: 'Tournament Gameplay',
-    category: 'Single-Player Ladder',
-    aspect: '16:9',
-    captureBrief:
-      'Replace with an actual Android capture showing the Tournament bracket and live wooden desk match against an AI opponent.',
-    recommendedFilename: 'public/media/gameplay-tournament.png',
-  },
-  {
-    id: 'pen-collision-effects',
-    title: 'Pen Collision Effects',
-    category: 'Physics & Impact',
-    aspect: '16:9',
-    captureBrief:
-      'Replace with a verified in-game frame capturing high-momentum impact sparks, rotational momentum, and desk-edge knockouts.',
-    recommendedFilename: 'public/media/gameplay-collision.png',
-  },
-  {
-    id: 'pen-collection-upgrades',
-    title: 'Pen Collection & Armory',
-    category: 'Collectibles',
-    aspect: '16:9',
-    captureBrief:
-      'Replace with a genuine screenshot of the in-game armory displaying Classic Ballpoint through Gold Fountain unlock progress.',
-    recommendedFilename: 'public/media/gameplay-armory.png',
-  },
-  {
-    id: 'online-multiplayer',
-    title: 'Online 1v1 Multiplayer',
-    category: 'Competitive Arena',
-    aspect: '16:9',
-    captureBrief:
-      'Replace with a real capture of live 1v1 matchmaking and turn synchronization once production multiplayer is verified.',
-    recommendedFilename: 'public/media/gameplay-online-1v1.png',
-  },
-  {
-    id: 'leaderboards-aura',
-    title: 'Leaderboards & Aura Rating',
-    category: 'Rankings',
-    aspect: '16:9',
-    captureBrief:
-      'Replace with a real screenshot of competitive rankings, Aura Rating standings, and player profile cards.',
-    recommendedFilename: 'public/media/gameplay-leaderboard.png',
-  },
-  {
-    id: 'victory-animations',
-    title: 'Victory Animations',
-    category: 'Match Resolution',
-    aspect: '16:9',
-    captureBrief:
-      'Replace with an actual capture of post-knockout victory feedback, coin rewards, and match progression summary.',
-    recommendedFilename: 'public/media/gameplay-victory.png',
   },
 ];
 
@@ -217,6 +150,6 @@ export const SUPPORT_FAQS: SupportFaqItem[] = [
     category: 'Privacy & Ads',
     question: 'How do I permanently delete my account and associated data?',
     answer:
-      'You can request permanent deletion of your game account and associated cloud data at any time through our dedicated Account Deletion page (/delete-account) or from inside the Android app account settings once signed in.',
+      'You can request permanent deletion of your game account and associated cloud data through the Account Deletion page (/delete-account). Use the email linked to your game account so the request can be verified.',
   },
 ];

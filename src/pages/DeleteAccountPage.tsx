@@ -110,26 +110,13 @@ export function DeleteAccountPage() {
           </ConfirmationNotice>
         </div>
 
-        {/* Two Ways to Request Deletion */}
-        <section aria-labelledby="how-to-delete" className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <section aria-labelledby="how-to-delete" className="mt-10">
           <div className="rounded-xl border border-white/10 bg-[#11151F] p-6">
-            <p className="text-xs font-medium text-[#60A5FA]">Option 1 · Inside the Android App</p>
-            <h2 id="how-to-delete" className="mt-1.5 font-display text-2xl font-bold text-white">
-              In-App Account Deletion
+            <h2 id="how-to-delete" className="font-display text-2xl font-bold text-white">
+              Request account deletion by email
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-[#CBD5E1]">
-              If you still have {siteConfig.appName} installed on your Android device and are signed in with Google Sign-In, open the app&apos;s{' '}
-              <strong className="text-white">Settings → Account → Delete Account</strong> option to request permanent account removal directly from inside the game.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-white/10 bg-[#11151F] p-6">
-            <p className="text-xs font-medium text-[#EAB308]">Option 2 · Web Request (No App Needed)</p>
-            <h2 className="mt-1.5 font-display text-2xl font-bold text-white">
-              Verified Email Deletion Request
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#CBD5E1]">
-              If you already uninstalled the game or cannot sign in, use the request composer below or email{' '}
+              Use the request composer below to open a draft in your email app, or write to{' '}
               <a
                 href={`mailto:${siteConfig.supportEmail}?subject=${encodeURIComponent('[Account Deletion Request] Pen Fight Aura Wars')}`}
                 className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
@@ -371,7 +358,7 @@ export function DeleteAccountPage() {
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#B4BCCE]">
               <li>Supabase Authentication record (user ID and linked Google Sign-In email).</li>
               <li>Player profile, in-game display name, and leaderboard standings.</li>
-              <li>Cloud-saved gameplay progress, virtual coins, achievements, and unlocked pens.</li>
+              <li>Cloud-saved gameplay progress, Aura Points, achievements, and unlocked pens.</li>
               <li>Aura Rating and personal multiplayer history tied to your account identifier.</li>
             </ul>
           </div>

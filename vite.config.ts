@@ -1,30 +1,46 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import fs from 'fs';
 import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig(() => {
+const routes = ['/', '/download', '/support', '/privacy', '/delete-account', '/terms'];
+
+function siteOrigin(value: string | undefined) {
+  if (!value) return null;
+  const url = new URL(value);
+  if (url.protocol !== 'https:' || url.pathname !== '/' || url.search || url.hash || url.username || url.password) {
+    throw new Error('VITE_SITE_URL must be the HTTPS origin of the official site.');
+  }
+  return url.origin;
+}
+
+export default defineConfig(({ mode }) => {
+  const origin = siteOrigin(loadEnv(mode, import.meta.dirname, 'VITE_').VITE_SITE_URL?.trim());
   return {
     plugins: [
       react(),
       tailwindcss(),
-      // Copies src/assets into dist/ so root-relative URLs like
-      // "/src/assets/images/..." (e.g. generate_image output) still resolve
-      // in production builds. Do not remove.
       {
-        name: 'copy-unbundled-src-assets',
+        name: 'official-site-metadata',
         apply: 'build',
-        closeBundle(error?: Error): void {
-          if (error) {
-            return;
-          }
-          const distDir = path.resolve(import.meta.dirname, 'dist');
-          const srcAssets = path.resolve(import.meta.dirname, 'src/assets');
-          const distAssets = path.resolve(distDir, 'src/assets');
-          if (fs.existsSync(distDir) && fs.existsSync(srcAssets)) {
-            fs.cpSync(srcAssets, distAssets, {recursive: true, force: true});
-          }
+        transformIndexHtml(html) {
+          if (!origin) return html;
+          return {
+            html: html.replaceAll('content="/media/social.jpg"', `content="${origin}/media/social.jpg"`),
+            tags: [
+              { tag: 'link', attrs: { rel: 'canonical', href: `${origin}/` } },
+              { tag: 'meta', attrs: { property: 'og:url', content: `${origin}/` } },
+            ],
+          };
+        },
+        generateBundle() {
+          const robots = 'User-agent: *\nAllow: /\n';
+          this.emitFile({ type: 'asset', fileName: 'robots.txt',
+            source: origin ? `${robots}Sitemap: ${origin}/sitemap.xml\n` : robots });
+          if (!origin) return;
+          const links = routes.map(route => `  <url><loc>${origin}${route}</loc></url>`).join('\n');
+          this.emitFile({ type: 'asset', fileName: 'sitemap.xml',
+            source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${links}\n</urlset>\n` });
         },
       },
     ],
