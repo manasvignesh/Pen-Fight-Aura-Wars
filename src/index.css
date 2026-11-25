@@ -429,23 +429,6 @@
   opacity: 0.24;
 }
 
-.hero-art-frame {
-  aspect-ratio: 3 / 2;
-  border: 1px solid var(--site-rule);
-  border-radius: 0.65rem;
-  background: #342634;
-  box-shadow: 0 20px 58px #110f1b8a;
-}
-
-.hero-art-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0.5rem;
-  border: 1px solid #f2c19040;
-  border-radius: 0.25rem;
-  pointer-events: none;
-}
-
 .practice-section {
   background:
     radial-gradient(ellipse at 83% 42%, #243939 0%, transparent 67%),
@@ -477,14 +460,6 @@
 .site-reader::before {
   opacity: 0.16;
   mask-image: linear-gradient(90deg, #000, transparent 21%, transparent 79%, #000);
-}
-
-@media (min-width: 64rem) {
-  .hero-art-frame {
-    margin-left: -1.5rem;
-    aspect-ratio: 1.27;
-    mask-image: linear-gradient(90deg, transparent, #000 18%);
-  }
 }
 
 .poster-modes {
@@ -603,4 +578,379 @@
 .flick-action {
   min-height: 2.75rem;
   padding: 0.45rem 0.8rem;
+}
+
+.classroom-scene {
+  view-timeline-name: --classroom-scroll;
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 3 / 2;
+  perspective: 1050px;
+}
+
+.classroom-scene-turn {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.classroom-paper,
+.classroom-paper-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+}
+
+.classroom-paper-back {
+  transform: translate3d(5px, 9px, -30px) rotate(-2.5deg);
+  border: 1px solid #bc885777;
+  background:
+    linear-gradient(125deg, #32273870, #392537 72%),
+    url("/media/portraits/sanganer-buti.webp") center / 360px;
+  box-shadow: 0 24px 52px #100f1bb8;
+}
+
+.classroom-paper {
+  overflow: hidden;
+  border: 1px solid #e1ad796b;
+  background: #342634;
+  box-shadow: inset 0 0 0 1px #2d2035, 0 12px 30px #130e1d93;
+}
+
+.classroom-paper::after {
+  content: "";
+  position: absolute;
+  inset: 0.48rem;
+  border: 1px solid #f9dfad57;
+  border-radius: 0.18rem;
+  pointer-events: none;
+}
+
+.classroom-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 64% 50%;
+}
+
+.classroom-foreground {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(58px);
+  pointer-events: none;
+}
+
+.classroom-foreground-pen {
+  position: absolute;
+  right: 0;
+  bottom: -5%;
+  width: 43%;
+  transform: rotate(-11deg);
+  filter: drop-shadow(0 11px 7px #100d1bba);
+}
+
+.rival-portrait img {
+  transform-origin: center 35%;
+}
+
+.match-reel {
+  display: grid;
+  gap: 1rem;
+}
+
+.reel-chapters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.reel-chapter {
+  position: relative;
+  display: grid;
+  min-height: 3rem;
+  align-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.reel-chapter-arrow {
+  position: absolute;
+  right: 1rem;
+  bottom: 1.15rem;
+  display: none;
+}
+
+.reel-device {
+  max-width: min(255px, 32vh);
+  box-shadow: 0 11px 0 -5px #584035, 0 22px 38px #0b0916c6;
+  transform-style: preserve-3d;
+}
+
+.reel-stage {
+  perspective: 850px;
+}
+
+.reel-stage::before,
+.reel-stage::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto 10% 9%;
+  height: 32%;
+  border: 1px solid #e2ad6966;
+  border-radius: 50%;
+  transform: rotateX(55deg);
+}
+
+.reel-stage::after {
+  inset-inline: 17%;
+  height: 25%;
+  border-style: dashed;
+  border-color: #ffd59665;
+}
+
+.pen-angle {
+  accent-color: var(--site-accent);
+}
+
+@media (min-width: 64rem) {
+  .classroom-scene {
+    aspect-ratio: 1.34;
+    margin-left: -0.6rem;
+  }
+}
+
+@media (min-width: 64rem) and (min-height: 48rem) and (prefers-reduced-motion: no-preference) {
+  .match-reel-scroll {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    gap: clamp(1.8rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+
+  .match-reel-scroll .reel-chapters {
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-bottom: clamp(6rem, 13vh, 8rem);
+  }
+
+  .match-reel-scroll .reel-chapter {
+    min-height: clamp(9.5rem, 20vh, 13.5rem);
+    border: 0;
+    border-top: 1px solid var(--site-rule);
+    border-radius: 0;
+    padding: 1.5rem 2.25rem 1.5rem 1.3rem;
+    font-size: 1.35rem;
+  }
+
+  .reel-index {
+    color: var(--site-accent);
+  }
+
+  .reel-chapter-description {
+    max-width: 42ch;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--site-muted);
+  }
+
+  .reel-chapter-arrow {
+    display: block;
+  }
+
+  .match-reel-scroll .reel-screen {
+    position: sticky;
+    top: 5.5rem;
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .classroom-scene-turn {
+    transform: rotateX(var(--scene-pitch, 0deg)) rotateY(var(--scene-yaw, 0deg));
+    transition: transform 160ms ease-out;
+  }
+
+  .rival-portrait img {
+    transition: transform 210ms ease-out;
+    transform: perspective(640px) rotateX(var(--rival-pitch, 0deg)) rotateY(var(--rival-yaw, 0deg)) scale(var(--rival-scale, 1));
+  }
+
+  .rival-portrait:hover img {
+    --rival-scale: 1.06;
+  }
+
+  .mode-composition .mode-pen-left {
+    animation: mode-flick-left 470ms cubic-bezier(0.16, 0.81, 0.28, 1.16) both;
+  }
+
+  .mode-composition .mode-pen-right {
+    animation: mode-flick-right 540ms cubic-bezier(0.16, 0.81, 0.28, 1.16) both;
+  }
+
+  .reel-device {
+    animation: reel-enter 360ms cubic-bezier(0.2, 0.73, 0.4, 1) both;
+  }
+
+  @supports (animation-timeline: view()) {
+    .classroom-paper {
+      animation: paper-leaves linear both;
+      animation-timeline: --classroom-scroll;
+      animation-range: exit 0% exit 92%;
+    }
+
+    .classroom-foreground-pen {
+      animation: ink-pen-leaves linear both;
+      animation-timeline: --classroom-scroll;
+      animation-range: exit 0% exit 100%;
+    }
+
+    .site-nav::after {
+      position: absolute;
+      content: "";
+      inset: auto 0 0;
+      height: 2px;
+      transform-origin: left;
+      background: linear-gradient(90deg, #96b6ae, #f1c586 68%, #cf7a5f);
+      animation: reading-line linear both;
+      animation-timeline: scroll(root block);
+      pointer-events: none;
+    }
+  }
+}
+
+@keyframes reading-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes paper-leaves {
+  to { transform: translate3d(0, -12px, -7px) rotateX(3deg) scale(0.994); }
+}
+
+@keyframes ink-pen-leaves {
+  from { transform: translate3d(0, 0, 0) rotate(-11deg); }
+  to { transform: translate3d(9%, -32%, 12px) rotate(-4deg); }
+}
+
+@keyframes mode-flick-left {
+  from { transform: translate3d(-25%, 40%, 0) rotate(-18deg); opacity: 0.45; }
+  to { transform: translate3d(0, 0, 0) rotate(0); opacity: 1; }
+}
+
+@keyframes mode-flick-right {
+  from { transform: translate3d(23%, -24%, 0) rotate(21deg); opacity: 0.45; }
+  to { transform: translate3d(0, 0, 0) rotate(0); opacity: 1; }
+}
+
+@keyframes reel-enter {
+  from { transform: rotateY(-4deg) translateY(4px) scale(0.99); opacity: 0.75; }
+  to { transform: rotateY(0) rotateX(0) translateY(0) scale(1); opacity: 1; }
+}
+
+.practice-power {
+  height: 0.25rem;
+  width: min(7.75rem, 32%);
+  overflow: hidden;
+  border-radius: 100vw;
+  background: #ebbe8638;
+}
+
+.practice-power > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, #79c8b9, #ffdb86 78%, #f3a26f);
+}
+
+.practice-impact {
+  position: absolute;
+  z-index: 25;
+  width: 2.2rem;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border: 1.5px solid #ffe0a3;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.flick-desk {
+  box-shadow:
+    0 2px 0 #e4af6870,
+    0 5px 0 #62432f,
+    0 8px 0 #3b272c,
+    0 13px 18px #100e1c;
+}
+
+.practice-pen-sprite {
+  filter: drop-shadow(0 3px 2px #100b1cb8) drop-shadow(0 7px 6px #100b1c85);
+}
+
+.reel-device {
+  background: linear-gradient(153deg, #69503c, #332732 48%, #483640 90%);
+}
+
+.reel-replay {
+  aspect-ratio: 168 / 311;
+  object-fit: cover;
+  background: #1c3334;
+}
+
+.mode-composition {
+  perspective: 850px;
+}
+
+.mode-composition::before {
+  transform: rotateX(13deg) scale(0.98);
+  box-shadow: inset 0 0 26px #ddae6b19, 0 24px 32px #140b1a73;
+}
+
+.mode-composition .mode-pen-left,
+.mode-composition .mode-pen-right {
+  filter: drop-shadow(0 13px 7px #130c1bb2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .practice-impact {
+    animation: practice-impact 390ms cubic-bezier(0.12, 0.52, 0.42, 0.97);
+  }
+
+  .practice-arena[data-hit="true"] .flick-desk {
+    animation: practice-hit-stop 185ms ease-out;
+  }
+}
+
+@keyframes practice-impact {
+  from { transform: scale(0.42); opacity: 0.94; }
+  to { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes practice-hit-stop {
+  18% { transform: translate(1.5px, -1px); }
+  42% { transform: translate(-1px, 0.5px); }
+  to { transform: translate(0); }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .mode-art-layers {
+    transition: transform 340ms cubic-bezier(0.18, 0.72, 0.32, 1);
+  }
+
+  .mode-composition:hover .mode-art-layers {
+    transform: rotateX(8deg) rotateY(-6deg) translateZ(18px);
+  }
+
+  .download-finale-art {
+    transition: transform 480ms cubic-bezier(0.18, 0.72, 0.32, 1);
+    transform-origin: right center;
+  }
+
+  .download-finale:has(.site-primary-action:is(:hover, :focus-visible)) .download-finale-art {
+    transform: translateX(-9px) scale(1.035);
+  }
 }

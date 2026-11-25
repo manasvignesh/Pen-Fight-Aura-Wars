@@ -59,11 +59,11 @@ export function PlayModes() {
           </div>
           <div id="mode-feature" className="game-frame overflow-hidden">
             <div className="mode-composition relative isolate aspect-[2/1] min-h-36 overflow-hidden">
-              <div key={active.id} className="editorial-reveal absolute inset-0" aria-hidden="true">
+              <div key={active.id} className="mode-art-layers editorial-reveal absolute inset-0" aria-hidden="true">
                 <img src={`/pens/${active.pens[0]}.webp`} alt="" width={600} height={174} loading="lazy"
-                  className="absolute left-[8%] top-[47%] w-[57%] -rotate-[14deg] drop-shadow-xl" />
+                  className="mode-pen-left absolute left-[8%] top-[47%] w-[57%] -rotate-[14deg] drop-shadow-xl" />
                 <img src={`/pens/${active.pens[1]}.webp`} alt="" width={600} height={174} loading="lazy"
-                  className="absolute right-[6%] top-[26%] w-[45%] rotate-[24deg] drop-shadow-xl" />
+                  className="mode-pen-right absolute right-[6%] top-[26%] w-[45%] rotate-[24deg] drop-shadow-xl" />
               </div>
             </div>
             <div aria-live="polite" className="border-t border-[var(--site-rule)] px-4 py-5 sm:px-7 sm:py-6">

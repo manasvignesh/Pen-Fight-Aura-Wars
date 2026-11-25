@@ -1,4 +1,5 @@
 import { ArrowDownRight } from 'lucide-react';
+import { ClassroomScene } from '../components/ClassroomScene';
 import { Layout } from '../components/Layout';
 import { DownloadButtons } from '../components/DownloadButtons';
 import { FlickDemo } from '../components/FlickDemo';
@@ -15,7 +16,7 @@ export function HomePage() {
       title: 'Pen Fight Aura Wars — Official Android Game',
       description: 'Flick your pen and knock rivals off the desk. Climb the Tournament ladder, upgrade your pens, or play Ranked 1v1 on Android.',
     }}>
-      <section className="illustrated-hero textile-section overflow-hidden">
+      <section className="illustrated-hero textile-section overflow-clip">
         <div className="site-editorial-width relative grid items-center gap-7 py-10 sm:py-14 lg:min-h-[590px] lg:grid-cols-[0.93fr_1.07fr] lg:gap-0 lg:py-14">
           <div className="hero-lettering relative z-10 lg:py-12">
             <h1 className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--site-accent)] sm:text-sm">Pen Fight Aura Wars</h1>
@@ -29,10 +30,7 @@ export function HomePage() {
             </p>
             <div className="mt-6"><DownloadButtons /></div>
           </div>
-          <figure className="hero-art-frame relative isolate overflow-hidden" aria-label="Illustrated Tournament scene">
-            <img src="/media/illustrations/classroom-match.webp" alt="Meera lines up a flick with her green highlighter across a school desk"
-              width={1440} height={960} fetchPriority="high" className="h-full w-full object-cover object-[64%_50%]" />
-          </figure>
+          <ClassroomScene />
         </div>
       </section>
 

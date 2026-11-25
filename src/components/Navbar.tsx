@@ -27,7 +27,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 h-16 border-b border-[var(--site-rule)] bg-[#1c1b29]/95 backdrop-blur-md">
+    <header className="site-nav sticky top-0 z-50 h-16 border-b border-[var(--site-rule)] bg-[#1c1b29]/95 backdrop-blur-md">
       <div className="site-editorial-width flex h-full items-center justify-between gap-5">
         {/* Zone 1: Single-line Brand Wordmark */}
         <Link
