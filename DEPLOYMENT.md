@@ -9,9 +9,9 @@ Connect your Git repository in the Cloudflare Dashboard (**Workers & Pages → C
 - **Framework preset**: `Vite` (or `None`)
 - **Build command**: `npm run build`
 - **Build output directory**: `dist`
-- **Node.js version** (Environment variable): `NODE_VERSION=20`
+- **Node.js version** (Environment variable): `NODE_VERSION=22`
 
-Use the hosting service's SPA fallback for `/download`, `/privacy`, `/delete-account`, `/support`, and `/terms`. Serve `app-ads.txt`, the generated robots and sitemap files, and downloadable assets directly from the build output.
+The live site uses Cloudflare Workers Static Assets. Serve the generated HTML at the extensionless routes and use the 404 page for unknown URLs, as configured in `wrangler.jsonc`. The build writes the pages, robots.txt, and sitemap.xml to dist and copies app-ads.txt and the other public assets.
 
 ## 2. Public Environment Variables (Cloudflare Pages → Settings → Environment Variables)
 
@@ -19,7 +19,7 @@ Only public, non-secret values should be stored in `VITE_*` variables. **Never**
 
 | Variable | Example Value | Purpose |
 | --- | --- | --- |
-| `VITE_SITE_URL` | `https://penfightaurawars.com` | Actual public HTTPS origin for canonical and social URLs and for sitemap generation |
+| `VITE_SITE_URL` | `https://pen-fight-aura-wars.manasvig43.workers.dev` | Optional canonical origin override. The build defaults to the current Workers address. |
 | `VITE_PUBLISHER_NAME` | `Your Studio or Developer Name` | Footer copyright & legal publisher identity |
 | `VITE_SUPPORT_EMAIL` | `support@yourdomain.com` | Support & account deletion `mailto:` address |
 | `VITE_PLAY_STORE_LIVE` | `false` or `true` | Switches Google Play CTA from "Coming Soon" to live link |
@@ -79,3 +79,15 @@ The included version is configured in src/config/bundledApk.ts. Replace the bund
 - **Account Deletion**: Edit `src/pages/DeleteAccountPage.tsx`.
 - **Terms of Service**: Edit `src/pages/TermsPage.tsx`.
 - **Gameplay media**: Store real game captures in public/media/ and update GameplayShowcase.tsx when the list changes.
+
+## 7. Google Search Console
+
+The build uses the current public Workers address, https://pen-fight-aura-wars.manasvig43.workers.dev/, by default. Leave VITE_SITE_URL unset unless the canonical public origin changes.
+
+1. In [Google Search Console](https://search.google.com/search-console), add a **URL prefix** property for `https://pen-fight-aura-wars.manasvig43.workers.dev/`.
+2. Choose **HTML tag** and copy the value inside the tag’s `content` attribute. Set `GOOGLE_SITE_VERIFICATION` to that value in the Cloudflare **build environment**. The build adds this tag to the homepage HTML. If building locally, set the variable before running `npm run build`.
+3. After the owner approves publishing the website update, confirm the tag is present in the live homepage source, then click **Verify**. Keep the variable set for subsequent builds.
+4. Open **Sitemaps** and submit `sitemap.xml`. Confirm it reports success and lists only real page URLs. Inspect the homepage and `/download` in **URL Inspection**, run the live test, and request indexing.
+5. Check **Page indexing** for crawl or canonical issues. Use the **Performance** report to compare clicks and impressions for the homepage and download page. Check **Core Web Vitals** and mobile PageSpeed Insights after the live release. Google may require more traffic before it can report field data.
+
+[Google ownership verification](https://support.google.com/webmasters/answer/9008080) · [Google sitemap guidance](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)

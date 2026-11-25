@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { DownloadSparks } from './components/DownloadSparks';
 import { HomePage } from './pages/HomePage';
 import { DownloadPage } from './pages/DownloadPage';
@@ -10,7 +10,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/download" element={<DownloadPage />} />
@@ -21,6 +21,6 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <DownloadSparks />
-    </BrowserRouter>
+    </>
   );
 }

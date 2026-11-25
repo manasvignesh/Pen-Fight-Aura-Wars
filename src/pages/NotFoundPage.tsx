@@ -3,12 +3,7 @@ import { Layout } from '../components/Layout';
 
 export function NotFoundPage() {
   return (
-    <Layout
-      meta={{
-        title: 'Page Not Found — Pen Fight Aura Wars',
-        description: 'The requested page could not be found on the official Pen Fight Aura Wars website.',
-      }}
-    >
+    <Layout>
       <div className="mx-auto flex max-w-[720px] flex-col items-center px-4 py-24 text-center sm:px-6">
         <p className="font-mono text-sm font-medium text-[#EAB308]">404</p>
         <h1 className="mt-2 font-display text-5xl font-bold text-white sm:text-6xl">

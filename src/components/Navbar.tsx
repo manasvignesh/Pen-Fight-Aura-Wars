@@ -1,4 +1,4 @@
-import type { ComponentProps, CSSProperties } from 'react';
+import { useEffect, useState, type ComponentProps, type CSSProperties } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import CardNav from './react-bits/CardNav';
 import { siteConfig } from '../config/siteConfig';
@@ -32,10 +32,12 @@ function CardLink({ href, ...props }: Omit<ComponentProps<typeof Link>, 'to'> & 
 
 export function Navbar() {
   const location = useLocation();
+  const [activeHash, setActiveHash] = useState('');
+  useEffect(() => setActiveHash(location.hash), [location.hash]);
 
   const isRouteActive = (to: string) => {
     if (to.startsWith('/#')) {
-      return location.pathname === '/' && location.hash === to.slice(1);
+      return location.pathname === '/' && activeHash === to.slice(1);
     }
     return location.pathname === to;
   };

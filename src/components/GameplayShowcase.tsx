@@ -104,7 +104,7 @@ export function GameplayShowcase() {
                     <source src="/media/arena.mp4" type="video/mp4" />
                   </video>
                 ) : (
-                  <img src={`/media/${active.id}.jpg`} alt={active.alt} width={390} height={844} loading="lazy"
+                  <img src={`/media/${active.id}.jpg`} alt={active.alt} width={390} height={843} loading="lazy" decoding="async"
                     className="block aspect-[9/16] h-auto w-full rounded-[1.25rem] object-cover object-center" />
                 )}
               </div>

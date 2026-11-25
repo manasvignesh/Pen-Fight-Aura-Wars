@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import StarBorder from '../components/react-bits/StarBorder';
 import { siteConfig } from '../config/siteConfig';
+import { screenshotPaths } from '../config/seo';
+
+const screenshots = [
+  { src: screenshotPaths.match, alt: 'Two pens facing off on the classroom desk during a Tournament match', label: 'Tournament match', width: 336, height: 622 },
+  { src: screenshotPaths.weekly, alt: 'Weekly Tournament screen with three rival stages and the Clean Sweep challenge', label: 'Weekly Tournament', width: 390, height: 843 },
+  { src: screenshotPaths.garage, alt: 'Pen Garage showing grip and nib upgrades for the Classic Ballpoint', label: 'Pen Garage upgrades', width: 390, height: 843 },
+];
 
 export function DownloadPage() {
   const { playStore, apk } = siteConfig;
@@ -20,15 +27,12 @@ export function DownloadPage() {
   }
 
   return (
-    <Layout meta={{
-      title: 'Download Pen Fight Aura Wars for Android',
-      description: 'Get the official Pen Fight Aura Wars Android release, check the APK checksum, and find installation help.',
-    }}>
+    <Layout>
       <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
         <header className="download-page-heading textile-section game-frame px-5 sm:px-8">
           <h1 className="max-w-[17ch] font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Download Pen Fight Aura Wars</h1>
           <p className="mt-3 max-w-[48ch] text-base text-slate-300">
-            {playStore.isLive ? 'Use Google Play for automatic updates. The official APK is also available for direct installation.' : 'Get the signed Android APK directly from the official website.'}
+            {playStore.isLive ? 'Use Google Play for automatic updates. The official APK is also available for direct installation.' : 'Get the signed pen fight APK directly from the official website, then follow the steps below to install it.'}
           </p>
         </header>
 
@@ -82,6 +86,28 @@ export function DownloadPage() {
             <li>Complete installation, then turn the install permission back off if you enabled it.</li>
           </ol>
           <p className="mt-3 text-sm leading-relaxed text-slate-300">If Android rejects an update to a Google Play installation, use Google Play to update that copy. Before switching install sources, check that your progress is backed up.</p>
+        </section>
+
+        <section aria-labelledby="android-gameplay-heading" className="mt-10 border-t border-white/10 pt-7">
+          <h2 id="android-gameplay-heading" className="font-display text-2xl font-bold text-white">How the classroom pen battle works</h2>
+          <p className="mt-2 max-w-[65ch] text-sm leading-relaxed text-slate-300">
+            Pull back and release to flick your pen. Angle the hit to push your rival off the desk without sliding off yourself.
+            Play against 24 Tournament rivals, enter the weekly bracket, or take turns on one phone in Pass &amp; Play.
+            {siteConfig.features.onlineMultiplayerLive && ' Ranked 1v1 pairs you with another player online.'}
+          </p>
+          <p className="mt-2 max-w-[65ch] text-sm leading-relaxed text-slate-300">
+            Earn Aura Points to unlock pens and upgrade their grip and nib for Tournament matches.
+            <Link to="/#practice" className="ml-1 font-semibold text-[var(--site-accent)] hover:underline">Try a practice flick in your browser</Link>.
+          </p>
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5">
+            {screenshots.map(({ src, alt, label, width, height }) => (
+              <figure key={src} className="overflow-hidden rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)]">
+                <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async"
+                  className="mx-auto block h-auto w-full" />
+                <figcaption className="px-3 py-2 text-sm font-semibold text-[var(--site-text)]">{label}</figcaption>
+              </figure>
+            ))}
+          </div>
         </section>
 
         {apk.version === '1.2.7' && <section aria-labelledby="release-notes-heading" className="mt-7 border-t border-white/10 pt-6">

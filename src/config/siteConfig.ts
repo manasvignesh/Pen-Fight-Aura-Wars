@@ -16,6 +16,11 @@ const ADMOB_APP_ADS_LINE = 'google.com, pub-9403523388888787, DIRECT, f08c47fec0
 const configuredSupportEmail = cleanEnvString(env.VITE_SUPPORT_EMAIL);
 const configuredPublisherName = cleanEnvString(env.VITE_PUBLISHER_NAME);
 const configuredSiteUrl = cleanEnvString(env.VITE_SITE_URL);
+const siteOrigin = new URL(configuredSiteUrl ?? 'https://pen-fight-aura-wars.manasvig43.workers.dev');
+if (siteOrigin.protocol !== 'https:' || siteOrigin.pathname !== '/' ||
+    siteOrigin.search || siteOrigin.hash || siteOrigin.username || siteOrigin.password) {
+  throw new Error('VITE_SITE_URL must be the HTTPS origin of the official site.');
+}
 const configuredTrailerUrl = cleanEnvString(env.VITE_TRAILER_URL);
 const apkOverride = cleanEnvString(env.VITE_APK_URL);
 
@@ -28,7 +33,7 @@ export interface SiteConfig {
   publisherNameNeedsConfirmation: boolean;
   supportEmail: string;
   supportEmailNeedsConfirmation: boolean;
-  siteUrl: string | null;
+  siteUrl: string;
   playStore: PlayStoreActionState;
   apk: ValidatedApkConfig;
   features: {
@@ -53,7 +58,7 @@ export const siteConfig: SiteConfig = {
   publisherNameNeedsConfirmation: !configuredPublisherName,
   supportEmail: configuredSupportEmail ?? 'manasvig43@gmail.com',
   supportEmailNeedsConfirmation: !configuredSupportEmail,
-  siteUrl: configuredSiteUrl && isSafeHttpsUrl(configuredSiteUrl) ? configuredSiteUrl : null,
+  siteUrl: siteOrigin.origin,
   playStore: resolvePlayStoreAction({
     isLiveFlag: env.VITE_PLAY_STORE_LIVE,
     url: env.VITE_PLAY_STORE_URL,

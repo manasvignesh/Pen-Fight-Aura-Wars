@@ -22,6 +22,8 @@ export function ClassroomScene() {
         <div className="classroom-paper-back" aria-hidden="true" />
         <div className="classroom-paper">
           <img src="/media/illustrations/classroom-match.webp" alt="Meera lines up a flick with her green highlighter across a school desk"
+            srcSet="/media/illustrations/classroom-match-480.webp 480w, /media/illustrations/classroom-match-960.webp 960w, /media/illustrations/classroom-match.webp 1440w"
+            sizes="(min-width: 1280px) 660px, (min-width: 1024px) 53vw, calc(100vw - 40px)"
             width={1440} height={960} fetchPriority="high" className="classroom-art" />
         </div>
         <div className="classroom-foreground" aria-hidden="true">

@@ -2,17 +2,10 @@ import { useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
-import { siteConfig } from '../config/siteConfig';
-import { formatCanonicalUrl } from '../utils/validation';
+import { updatePageSeo } from '../config/seo';
 import { installWeightedWheel, scrollKeys } from '../utils/weightedWheel';
 
-export interface RouteMeta {
-  title: string;
-  description: string;
-}
-
 interface LayoutProps {
-  meta: RouteMeta;
   children: ReactNode;
 }
 
@@ -61,49 +54,12 @@ function scrollToSection(target: HTMLElement) {
   return stop;
 }
 
-export function Layout({ meta, children }: LayoutProps) {
+export function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
   useEffect(() => installWeightedWheel(), [location.key]);
 
-  useEffect(() => {
-    document.title = meta.title;
-
-    const updateMetaTag = (selector: string, content: string) => {
-      const el = document.querySelector(selector);
-      if (el) {
-        el.setAttribute('content', content);
-      }
-    };
-
-    updateMetaTag('meta[name="description"]', meta.description);
-    updateMetaTag('meta[property="og:title"]', meta.title);
-    updateMetaTag('meta[property="og:description"]', meta.description);
-    updateMetaTag('meta[name="twitter:title"]', meta.title);
-    updateMetaTag('meta[name="twitter:description"]', meta.description);
-
-    const canonicalHref = formatCanonicalUrl(
-      siteConfig.siteUrl,
-      window.location.origin,
-      location.pathname
-    );
-
-    let canonicalEl = document.querySelector('link[rel="canonical"]');
-    if (!canonicalEl) {
-      canonicalEl = document.createElement('link');
-      canonicalEl.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalEl);
-    }
-    canonicalEl.setAttribute('href', canonicalHref);
-
-    let ogUrlEl = document.querySelector('meta[property="og:url"]');
-    if (!ogUrlEl) {
-      ogUrlEl = document.createElement('meta');
-      ogUrlEl.setAttribute('property', 'og:url');
-      document.head.appendChild(ogUrlEl);
-    }
-    ogUrlEl.setAttribute('content', canonicalHref);
-  }, [meta.title, meta.description, location.pathname]);
+  useEffect(() => updatePageSeo(location.pathname), [location.pathname]);
 
   useEffect(() => {
     if (location.hash) {

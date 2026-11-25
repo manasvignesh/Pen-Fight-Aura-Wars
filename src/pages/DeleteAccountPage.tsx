@@ -72,13 +72,7 @@ export function DeleteAccountPage() {
   };
 
   return (
-    <Layout
-      meta={{
-        title: 'Account & Data Deletion — Pen Fight Aura Wars',
-        description:
-          'Request permanent deletion of your Pen Fight Aura Wars game account and associated cloud data without needing to reinstall the Android app.',
-      }}
-    >
+    <Layout>
       <div className="mx-auto max-w-[1000px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <header className="page-masthead textile-section">
           <p className="text-sm font-medium text-[var(--site-accent)]">

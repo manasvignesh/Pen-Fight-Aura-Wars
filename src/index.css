@@ -963,3 +963,14 @@
     transform: none;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-headline {
+    animation: hero-headline-enter 420ms ease-out both;
+  }
+}
+
+@keyframes hero-headline-enter {
+  from { transform: translateY(5px); }
+  to { transform: translateY(0); }
+}

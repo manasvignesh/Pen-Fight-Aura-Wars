@@ -79,13 +79,7 @@ export function SupportPage() {
   };
 
   return (
-    <Layout
-      meta={{
-        title: 'Player Support & FAQ — Pen Fight Aura Wars',
-        description:
-          'Official player support for Pen Fight Aura Wars on Android: contact email, bug reporting, Google Sign-In troubleshooting, multiplayer connectivity, APK help, and FAQ.',
-      }}
-    >
+    <Layout>
       <div className="mx-auto max-w-[1100px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <header className="page-masthead textile-section">
           <p className="text-sm font-medium text-[var(--site-accent)]">Official Help Center</p>

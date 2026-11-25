@@ -7,13 +7,7 @@ export function TermsPage() {
   const lastUpdated = siteConfig.legal.lastUpdated ?? 'November 23, 2026';
 
   return (
-    <Layout
-      meta={{
-        title: 'Terms of Service — Pen Fight Aura Wars',
-        description:
-          'Official Terms of Service for Pen Fight Aura Wars on Android covering game license, user accounts, fair play, virtual collectibles, advertising, and support.',
-      }}
-    >
+    <Layout>
       <div className="mx-auto max-w-[960px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <header className="page-masthead textile-section">
           <p className="text-sm font-medium text-[var(--site-accent)]">Legal Terms</p>

@@ -1,7 +1,7 @@
 // Adapted from the supplied React Bits source. See LICENSE.md.
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import './SpecularButton.css';
 
@@ -197,6 +197,7 @@ const SpecularButton = ({
   const buttonRef = useRef(null);
   const canvasRef = useRef(null);
   const wakeRef = useRef(null);
+  const [nearViewport, setNearViewport] = useState(false);
   const settings = {
     radius: Math.max(0, radius),
     lineColor: String(lineColor),
@@ -217,6 +218,20 @@ const SpecularButton = ({
   settingsRef.current = settings;
 
   useEffect(() => {
+    const button = buttonRef.current;
+    if (!button || typeof IntersectionObserver === 'undefined' ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      setNearViewport(true);
+      observer.disconnect();
+    }, { rootMargin: '180px' });
+    observer.observe(button);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!nearViewport) return;
     const button = buttonRef.current;
     const canvas = canvasRef.current;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
@@ -425,7 +440,7 @@ const SpecularButton = ({
       gl.deleteProgram(program);
       if (!canvas.isConnected) gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
-  }, []);
+  }, [nearViewport]);
 
   useEffect(() => {
     wakeRef.current?.();

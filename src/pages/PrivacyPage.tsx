@@ -24,13 +24,7 @@ export function PrivacyPage() {
   const lastUpdated = siteConfig.legal.lastUpdated ?? 'November 23, 2026';
 
   return (
-    <Layout
-      meta={{
-        title: 'Privacy Policy — Pen Fight Aura Wars',
-        description:
-          'Official Privacy Policy for Pen Fight Aura Wars (com.penfightroyale.game) covering Google Sign-In, Supabase cloud saves, Render multiplayer, Google AdMob advertising, retention, and account deletion.',
-      }}
-    >
+    <Layout>
       <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <header className="page-masthead textile-section">
           <p className="text-sm font-medium text-[var(--site-accent)]">Google Play &amp; Player Privacy</p>
