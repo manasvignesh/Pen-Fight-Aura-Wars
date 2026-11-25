@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import type { ComponentProps, CSSProperties } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import CardNav from './react-bits/CardNav';
 import { siteConfig } from '../config/siteConfig';
 
 const NAV_ITEMS = [
@@ -11,13 +11,27 @@ const NAV_ITEMS = [
   { label: 'Support', to: '/support' },
 ];
 
-export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
+const MOBILE_CARDS = [
+  { label: 'Play', bgColor: '#253b3a', textColor: '#fff1d6', links: [
+    { label: 'Game modes', href: '/#features' },
+    { label: 'Try a flick', href: '/#practice' },
+    { label: 'Gameplay', href: '/#showcase' },
+  ] },
+  { label: 'Pen Garage', bgColor: '#3f2933', textColor: '#fff1d6', links: [
+    { label: 'Meet the pens', href: '/#pens' },
+  ] },
+  { label: 'Get started', bgColor: '#343047', textColor: '#fff1d6', links: [
+    { label: 'Download', href: '/download' },
+    { label: 'Player support', href: '/support' },
+  ] },
+];
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname, location.hash]);
+function CardLink({ href, ...props }: Omit<ComponentProps<typeof Link>, 'to'> & { href: string }) {
+  return <Link to={href} {...props} />;
+}
+
+export function Navbar() {
+  const location = useLocation();
 
   const isRouteActive = (to: string) => {
     if (to.startsWith('/#')) {
@@ -28,7 +42,7 @@ export function Navbar() {
 
   return (
     <header className="site-nav sticky top-0 z-50 h-16 border-b border-[var(--site-rule)] bg-[#1c1b29]/95 backdrop-blur-md">
-      <div className="site-editorial-width flex h-full items-center justify-between gap-5">
+      <div className="site-editorial-width hidden h-full items-center justify-between gap-5 lg:flex">
         {/* Zone 1: Single-line Brand Wordmark */}
         <Link
           to="/"
@@ -61,64 +75,37 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Zone 3: Single Primary Action + Mobile Drawer Toggle */}
+        {/* Zone 3: Primary action */}
         <div className="flex items-center gap-3 shrink-0">
           <Link
             to="/download"
+            data-download-spark
             className="site-primary-action nav-download hidden sm:inline-flex whitespace-nowrap shrink-0"
           >
             Get the Game
           </Link>
-
-          <button
-            type="button"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-navigation-drawer"
-            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-[#E2E8F0] transition-colors hover:bg-white/[0.06] lg:hidden"
-          >
-            {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
-          </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
-      {mobileOpen && (
-        <nav
-          id="mobile-navigation-drawer"
-          aria-label="Mobile navigation"
-          className="border-b border-[var(--site-rule)] bg-[var(--site-panel)] px-4 pb-5 pt-3 lg:hidden"
-        >
-          <div className="flex flex-col space-y-1">
-            {NAV_ITEMS.map((item) => {
-              const active = isRouteActive(item.to);
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  aria-current={active ? 'page' : undefined}
-                  className={`flex min-h-[44px] items-center rounded-lg px-3 text-base font-medium transition-colors ${
-                    active
-                      ? 'bg-white/[0.07] text-white'
-                      : 'text-[#CBD5E1] hover:bg-white/[0.04] hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <div className="pt-2">
-              <Link
-                to="/download"
-                className="site-primary-action w-full"
-              >
-                Get the Game
-              </Link>
-            </div>
-          </div>
-        </nav>
-      )}
+      <div className="site-card-navigation mx-auto flex h-full max-w-[50rem] items-center px-2 lg:hidden">
+        <CardNav
+          key={location.key}
+          logo={<span className="font-display text-lg font-bold tracking-tight sm:text-xl">{siteConfig.appName}</span>}
+          logoAlt={siteConfig.appName}
+          logoHref="/"
+          items={MOBILE_CARDS}
+          cta={{ label: 'Get the Game', href: '/download' }}
+          linkComponent={CardLink}
+          ariaLabel="Mobile navigation"
+          menuLabel={false}
+          intro={false}
+          accentColor="#f3ca81"
+          cardHeight={132}
+          stagger={0.055}
+          bounce={0.08}
+          style={{ '--cn-panel': '#201e2c', '--cn-text': '#fff1d6', '--cn-radius': '12px' } as CSSProperties}
+        />
+      </div>
     </header>
   );
 }

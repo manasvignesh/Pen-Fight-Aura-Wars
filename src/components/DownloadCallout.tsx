@@ -19,17 +19,17 @@ export function DownloadCallout() {
           <div className="mt-7 flex flex-wrap items-center gap-4">
             <StarBorder>
               {playStore.isLive && playStore.href ? (
-                <a href={playStore.href} target="_blank" rel="noopener noreferrer" className="site-primary-action">
+                <a href={playStore.href} target="_blank" rel="noopener noreferrer" data-download-spark className="site-primary-action">
                   Get it on Google Play <ExternalLink className="size-4" aria-hidden="true" />
                 </a>
               ) : (
-                <Link to="/download#apk" className="site-primary-action">
+                <Link to="/download#apk" data-download-spark className="site-primary-action">
                   <ArrowDownToLine className="size-4" aria-hidden="true" />
                   {apk.isAvailable ? 'Get the Android APK' : 'Check Android availability'}
                 </Link>
               )}
             </StarBorder>
-            <Link to="/download#install-guide" className="site-secondary-action">
+            <Link to="/download#install-guide" data-download-spark className="site-secondary-action">
               Installation guide <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { ArrowUpRight, RotateCcw } from 'lucide-react';
 import { useReducedMotion } from 'motion/react';
-import ClickSpark from './react-bits/ClickSpark';
+import SpecularButton from './react-bits/SpecularButton';
 
 type Point = { x: number; y: number };
 type Pose = Point & { angle: number; drop: number };
@@ -257,12 +257,7 @@ export function FlickDemo() {
         </div>
         {phase === 'ready' && !aim && <span className="pointer-events-none absolute z-20 -translate-x-1/2 text-[10px] font-bold text-[var(--site-text)]"
           style={position({ x: playerStart.x, y: playerStart.y + 27 })}>Your pen</span>}
-        {!reducedMotion && impact && (
-          <>
-            <span aria-hidden="true" className="practice-impact" style={position(impact)} />
-            <ClickSpark x={impact.x / width * 100} y={impact.y / height * 100} />
-          </>
-        )}
+        {!reducedMotion && impact && <span aria-hidden="true" className="practice-impact" style={position(impact)} />}
       </div>
       <div aria-hidden="true" className="mt-2 flex items-center gap-2 px-1 text-[10px] font-bold text-[var(--site-muted)]">
         <span>Power</span>
@@ -272,11 +267,13 @@ export function FlickDemo() {
         {result || (phase === 'moving' ? 'Flick in motion…' : 'Drag your blue pen away from the rival, then release.')}
       </p>
       <div className="flex flex-wrap items-center gap-2 px-1 pb-0.5">
-        <button type="button" aria-disabled={phase === 'moving'} onClick={() => phase === 'finished' ? reset() : shoot({ x: 57, y: -31 })}
-          className="site-secondary-action flick-action aria-disabled:opacity-50">
+        <SpecularButton type="button" aria-disabled={phase === 'moving'} onClick={() => phase === 'finished' ? reset() : shoot({ x: 57, y: -31 })}
+          className="practice-specular aria-disabled:opacity-50" size="sm" radius={8}
+          tint="#f3ca81" tintOpacity={0.12} textColor="#ffe1a4" lineColor="#ffd089"
+          baseColor="#9b784d" proximity={65} glow={0.5} idleIntensity={0.24}>
           {phase === 'finished' ? <RotateCcw className="size-3.5" aria-hidden="true" /> : <ArrowUpRight className="size-3.5" aria-hidden="true" />}
           {phase === 'finished' ? 'Try again' : 'Flick straight'}
-        </button>
+        </SpecularButton>
       </div>
     </div>
   );

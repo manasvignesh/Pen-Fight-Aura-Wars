@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { ArrowDownRight, ArrowUpRight, CalendarDays, Swords, Trophy, UsersRound } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
@@ -70,9 +71,9 @@ export function PlayModes() {
               <p className="text-xs font-bold text-[var(--site-accent)] lg:hidden">{active.format}</p>
               <h3 className="font-display text-3xl font-bold leading-none sm:text-5xl">{active.headline}</h3>
               <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-[var(--site-muted)]">{active.detail}</p>
-              {active.link && <a href={active.link.href} className="mt-1 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--site-accent)] hover:text-white">
+              {active.link && <Link to={active.link.href} className="mt-1 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--site-accent)] hover:text-white">
                 {active.link.label}<ArrowDownRight className="size-4" aria-hidden="true" />
-              </a>}
+              </Link>}
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import BounceCards from './react-bits/BounceCards';
@@ -21,9 +22,9 @@ export function RivalShowcase() {
             <h3 className="mt-1 font-display text-3xl font-bold leading-none sm:text-4xl">{active.name}</h3>
             <p className="mt-2 text-sm text-[var(--site-muted)]">{active.title} <span aria-hidden="true">·</span> {active.pen}</p>
           </div>
-          <a href="#showcase" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--site-accent)] hover:text-white">
+          <Link to="#showcase" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--site-accent)] hover:text-white">
             Watch a Tournament round <ArrowRight className="size-4" aria-hidden="true" />
-          </a>
+          </Link>
         </div>
         <BounceCards
           activeId={active.id}

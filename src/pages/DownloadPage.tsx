@@ -35,7 +35,7 @@ export function DownloadPage() {
         <section id="google-play" aria-labelledby="google-play-heading" className={playStore.isLive ? 'mt-7 scroll-mt-20 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-5' : 'sr-only'}>
           <h2 id="google-play-heading" className="font-display text-xl font-bold text-white">Google Play</h2>
           {playStore.isLive && playStore.href ? (
-            <a href={playStore.href} target="_blank" rel="noopener noreferrer"
+            <a href={playStore.href} data-download-spark target="_blank" rel="noopener noreferrer"
               className="mt-3 inline-flex min-h-12 items-center gap-2 rounded-lg bg-amber-300 px-5 py-2 text-sm font-bold text-slate-950 hover:bg-amber-200">
               Get it on Google Play <ExternalLink className="size-4" aria-hidden="true" />
             </a>
@@ -52,7 +52,7 @@ export function DownloadPage() {
           {apk.isAvailable && apk.url ? (
             <div className="mt-5">
               <StarBorder>
-              <a href={apk.url} download
+              <a href={apk.url} download data-download-spark
               className={playStore.isLive ? 'site-secondary-action' : 'site-primary-action'}>
               <ArrowDownToLine className="size-4" aria-hidden="true" /> Download signed APK
               </a>
@@ -89,7 +89,7 @@ export function DownloadPage() {
           <p className="mt-2 text-sm leading-relaxed text-slate-300">Stronger flick, hit, and ring-out vibrations, with an on/off toggle and a vibration test in Settings.</p>
         </section>}
 
-        <Link to="/support" className="mt-6 inline-flex min-h-10 items-center gap-2 rounded-lg text-sm font-semibold text-[var(--site-accent)] hover:underline">
+        <Link to="/support" data-download-spark className="mt-6 inline-flex min-h-10 items-center gap-2 rounded-lg text-sm font-semibold text-[var(--site-accent)] hover:underline">
           <LifeBuoy className="size-4" aria-hidden="true" /> Get installation help
         </Link>
       </div>

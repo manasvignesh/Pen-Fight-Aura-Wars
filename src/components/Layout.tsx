@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { siteConfig } from '../config/siteConfig';
 import { formatCanonicalUrl } from '../utils/validation';
+import { installWeightedWheel, scrollKeys } from '../utils/weightedWheel';
 
 export interface RouteMeta {
   title: string;
@@ -15,8 +16,55 @@ interface LayoutProps {
   children: ReactNode;
 }
 
+const anchorSpeed = 0.56;
+
+function scrollToSection(target: HTMLElement) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    target.scrollIntoView({ behavior: 'instant' });
+    return;
+  }
+
+  const start = window.scrollY;
+  const margin = Number.parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+  const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const end = Math.max(0, Math.min(maxScroll, start + target.getBoundingClientRect().top - margin));
+  const distance = end - start;
+  if (Math.abs(distance) < 2) return;
+
+  const duration = Math.min(700, 260 + Math.abs(distance) * 0.18) / anchorSpeed;
+  const listen = new AbortController();
+  let frame = 0;
+  let startTime: number | undefined;
+
+  function stop() {
+    cancelAnimationFrame(frame);
+    listen.abort();
+  }
+
+  function animate(now: number) {
+    startTime ??= now;
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+    window.scrollTo({ top: start + distance * eased, behavior: 'instant' });
+    if (progress < 1) frame = requestAnimationFrame(animate);
+    else stop();
+  }
+
+  const options = { passive: true, signal: listen.signal };
+  window.addEventListener('wheel', stop, options);
+  window.addEventListener('touchstart', stop, options);
+  window.addEventListener('pointerdown', stop, options);
+  window.addEventListener('keydown', (event) => {
+    if (scrollKeys.has(event.key)) stop();
+  }, options);
+  frame = requestAnimationFrame(animate);
+  return stop;
+}
+
 export function Layout({ meta, children }: LayoutProps) {
   const location = useLocation();
+
+  useEffect(() => installWeightedWheel(), [location.key]);
 
   useEffect(() => {
     document.title = meta.title;
@@ -62,12 +110,11 @@ export function Layout({ meta, children }: LayoutProps) {
       const id = location.hash.slice(1);
       const target = document.getElementById(id);
       if (target) {
-        target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
-        return;
+        return scrollToSection(target);
       }
     }
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, [location.pathname, location.hash]);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname, location.hash, location.key]);
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--site-ink)] text-[var(--site-text)]">

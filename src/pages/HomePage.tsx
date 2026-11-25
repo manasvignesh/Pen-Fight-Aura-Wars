@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ArrowDownRight } from 'lucide-react';
 import { ClassroomScene } from '../components/ClassroomScene';
 import { Layout } from '../components/Layout';
@@ -41,9 +42,9 @@ export function HomePage() {
             <p className="mt-4 max-w-[35ch] text-base leading-relaxed text-[var(--site-muted)]">
               Pull the blue pen away from your rival, aim with the dotted line, and release.
             </p>
-            <a href="#features" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--site-accent)] hover:text-white">
+            <Link to="#features" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--site-accent)] hover:text-white">
               Explore the game modes <ArrowDownRight className="size-4" aria-hidden="true" />
-            </a>
+            </Link>
           </div>
           <FlickDemo />
         </div>

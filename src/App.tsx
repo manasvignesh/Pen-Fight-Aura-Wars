@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { DownloadSparks } from './components/DownloadSparks';
 import { HomePage } from './pages/HomePage';
 import { DownloadPage } from './pages/DownloadPage';
 import { PrivacyPage } from './pages/PrivacyPage';
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <DownloadSparks />
     </BrowserRouter>
   );
 }
