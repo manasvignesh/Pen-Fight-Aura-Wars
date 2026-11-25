@@ -5,6 +5,7 @@ export interface CollectiblePen {
   accentHex: string;
   handlingSummary: string;
   unlockPath: string;
+  impactResistance: number;
   attributes: {
     weight: number;
     control: number;
@@ -20,8 +21,8 @@ export interface SupportFaqItem {
 }
 
 export { default as HERO_KEY_ART } from '../assets/images/hero.webp';
-export { default as PEN_LINEUP_ART } from '../assets/images/pen-lineup.webp';
 
+// Impact resistance uses base mass × grip × impact grip from the game.
 export const COLLECTIBLE_PENS: CollectiblePen[] = [
   {
     id: 'classic-ballpoint',
@@ -31,6 +32,7 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     handlingSummary:
       'Lightweight, predictable classroom staple built for learning flick angles, bank shots, and clean desk-edge positioning.',
     unlockPath: 'Starter pen available from the beginning of gameplay.',
+    impactResistance: 1,
     attributes: {
       weight: 52,
       control: 82,
@@ -44,7 +46,8 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#60A5FA',
     handlingSummary:
       'Smooth metallic barrel with low desk friction for crisp linear velocity, rapid recovery flicks, and clean angular snipes.',
-    unlockPath: 'Unlocked through Aura Points and progression milestones.',
+    unlockPath: 'Defeat 8 different Tournament rivals and spend 20,000 Aura Points.',
+    impactResistance: 0.91 * 0.92,
     attributes: {
       weight: 60,
       control: 88,
@@ -58,7 +61,8 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#A3E635',
     handlingSummary:
       'Broad flat silhouette creates a wide collision contact zone, ideal for pushing opponents off the desk in tight corners.',
-    unlockPath: 'Unlocked through Aura Points and gameplay progression.',
+    unlockPath: 'Defeat all 16 original rivals and spend 40,000 Aura Points.',
+    impactResistance: 1.18 * 1.05 * 1.24,
     attributes: {
       weight: 72,
       control: 68,
@@ -72,7 +76,8 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#F97316',
     handlingSummary:
       'High-mass barrel that resists knockback from light flicks and transfers heavy momentum on direct center-mass collisions.',
-    unlockPath: 'Unlocked through Aura Points and competitive tournament progress.',
+    unlockPath: 'Defeat all 16 original rivals and spend 92,000 Aura Points.',
+    impactResistance: 1.34 * 1.22,
     attributes: {
       weight: 92,
       control: 58,
@@ -86,7 +91,8 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#8B5CF6',
     handlingSummary:
       'Center-weighted body engineered for whipping rotational strikes and curving off-center deflections around blocking pens.',
-    unlockPath: 'Unlocked through Aura Points, gameplay progression, and supported achievements.',
+    unlockPath: 'Defeat 20 different Tournament rivals and spend 230,000 Aura Points.',
+    impactResistance: 1.23 * 0.98 * 1.29,
     attributes: {
       weight: 66,
       control: 90,
@@ -100,7 +106,8 @@ export const COLLECTIBLE_PENS: CollectiblePen[] = [
     accentHex: '#EAB308',
     handlingSummary:
       'Dense championship-grade metallic balance combining decisive knockout power with steady, authoritative desk control.',
-    unlockPath: 'Unlocked through sustained Aura Points, progression milestones, and supported achievements.',
+    unlockPath: 'Defeat 24 different Tournament rivals and spend 621,000 Aura Points.',
+    impactResistance: 1.37 * 1.01 * 1.33,
     attributes: {
       weight: 84,
       control: 86,

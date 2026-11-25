@@ -1,139 +1,90 @@
-import { useState } from 'react';
-import { COLLECTIBLE_PENS, PEN_LINEUP_ART } from '../data/gameContent';
-import { MediaFrame } from './MediaFrame';
+import { useState, type CSSProperties } from 'react';
+import { ArrowRight, LockKeyhole } from 'lucide-react';
+import { COLLECTIBLE_PENS } from '../data/gameContent';
+import TiltedCard from './react-bits/TiltedCard';
+
+const starter = COLLECTIBLE_PENS[0];
 
 export function PenShowcase() {
-  const [selectedPenId, setSelectedPenId] = useState(COLLECTIBLE_PENS[0].id);
-  const activePen =
-    COLLECTIBLE_PENS.find((pen) => pen.id === selectedPenId) ?? COLLECTIBLE_PENS[0];
+  const [activePen, setActivePen] = useState(starter);
+  const [test, setTest] = useState(0);
+  const slideDirection = activePen.impactResistance > starter.impactResistance ? "less" : "farther";
 
   return (
-    <section id="pens" aria-labelledby="pens-heading" className="scroll-mt-16 border-t border-white/[0.08] py-20 sm:py-24">
-      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <p className="text-sm font-medium text-[#EAB308]">Collectible Arsenal</p>
-          <h2
-            id="pens-heading"
-            className="mt-2 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl"
-          >
-            Six Distinct Classroom Pens
-          </h2>
-          <p className="mt-3 text-base leading-relaxed text-[#B4BCCE]">
-            Earn Aura Points and defeat Tournament rivals to unlock pens. Upgrade their grip or nib in the Garage to change how they handle in Tournament.
-          </p>
-        </div>
-
-        {/* Studio Lineup Key Art */}
-        <div className="mt-10 overflow-hidden rounded-xl border border-white/10 bg-[#121620]">
-          <MediaFrame
-            src={PEN_LINEUP_ART}
-            alt="Overhead studio lineup of the six collectible pens on a dark walnut wooden classroom desk: Classic Ballpoint, Hyper Gel Pro, Neon Highlighter, Chunky Marker, Vortex Spinner, and Gold Fountain"
-            fallbackTitle="Collectible Pen Lineup"
-            aspectClassName="aspect-[16/9]"
-          />
-          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/[0.08] px-5 py-3.5 text-xs text-[#94A3B8]">
-            <span>Left to right: Classic Ballpoint · Hyper Gel Pro · Neon Highlighter · Chunky Marker · Vortex Spinner · Gold Fountain</span>
-            <span>Studio concept render · Select a pen below to inspect profile</span>
+    <section id="pens" aria-labelledby="pens-heading" className="scroll-mt-20 border-t border-white/10 py-14 sm:py-20">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+        <h2 id="pens-heading" className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">Pen Garage</h2>
+        <p className="mt-3 max-w-xl leading-relaxed text-slate-300">Choose a pen to see how it handles and what you’ll need to unlock it in Tournament.</p>
+        <div className="mt-7 grid items-start gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-7">
+          <div role="group" aria-label="Choose a pen" className="grid min-w-0 grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-2">
+            {COLLECTIBLE_PENS.map((pen) => (
+              <button key={pen.id} type="button" aria-pressed={pen.id === activePen.id} aria-controls="garage-profile"
+                onClick={() => { setActivePen(pen); setTest(0); }}
+                className={`min-w-0 rounded-xl border px-2 py-2.5 text-left transition-colors sm:px-3 ${pen.id === activePen.id
+                  ? 'border-sky-300/55 bg-sky-400/10 text-sky-100'
+                  : 'border-white/10 bg-[#11151F] text-slate-200 hover:border-white/30'}`}>
+                <img alt="" src={`/pens/${pen.id}.webp`} width={600} height={174} loading="lazy" className="h-auto w-full" />
+                <span className="mt-0.5 block text-xs font-semibold sm:text-sm">{pen.name}</span>
+              </button>
+            ))}
           </div>
-        </div>
-
-        {/* Interactive Selector + Detail Split */}
-        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12">
-          {/* Pen Selector List */}
-          <div
-            role="tablist"
-            aria-label="Collectible pens"
-            className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-1"
-          >
-            {COLLECTIBLE_PENS.map((pen, index) => {
-              const isSelected = pen.id === activePen.id;
-              return (
-                <button
-                  key={pen.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isSelected}
-                  aria-controls={`pen-panel-${pen.id}`}
-                  id={`pen-tab-${pen.id}`}
-                  onClick={() => setSelectedPenId(pen.id)}
-                  className={`flex min-h-[52px] w-full items-center justify-between gap-3 rounded-lg border px-4 py-3 text-left transition-colors duration-150 ${
-                    isSelected
-                      ? 'border-[#3B82F6] bg-[#141C2B] text-white'
-                      : 'border-white/[0.08] bg-[#10141D] text-[#CBD5E1] hover:border-white/20 hover:bg-[#141925] hover:text-white'
-                  }`}
-                >
-                  <span className="min-w-0">
-                    <span className="block truncate text-sm font-semibold">{pen.name}</span>
-                    <span className="block truncate text-xs text-[#94A3B8]">{pen.archetype}</span>
-                  </span>
-                  <span className="font-mono text-xs tabular-nums text-[#64748B] shrink-0">
-                    0{index + 1}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Pen Profile Panel */}
-          <div
-            role="tabpanel"
-            id={`pen-panel-${activePen.id}`}
-            aria-labelledby={`pen-tab-${activePen.id}`}
-            className="flex flex-col justify-between rounded-xl border border-white/10 bg-[#11151F] p-6 sm:p-8 lg:col-span-7"
-          >
-            <div>
-              <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-white/[0.08] pb-5">
-                <div>
-                  <p className="text-xs font-medium text-[#94A3B8]">{activePen.archetype}</p>
-                  <h3 className="mt-1 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                    {activePen.name}
-                  </h3>
-                </div>
-                <span
-                  className="h-2.5 w-12 rounded-sm"
-                  style={{ backgroundColor: activePen.accentHex }}
-                  aria-hidden="true"
-                />
-              </div>
-
-              <p className="mt-5 text-base leading-relaxed text-[#CBD5E1]">
-                {activePen.handlingSummary}
-              </p>
-
-              {/* Handling Profile Meters */}
-              <div className="mt-7 space-y-4">
-                <p className="text-xs font-medium text-[#94A3B8]">
-                  Relative Handling Profile (Illustrative Gameplay Feel)
+          <div id="garage-profile" className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-[#11151F]"
+            style={{ '--pen-accent': activePen.accentHex } as CSSProperties}>
+            <div className="garage-stage grid min-h-44 place-items-center border-b border-white/10 px-5 py-3 sm:min-h-56">
+              <TiltedCard src={`/pens/${activePen.id}.webp`} alt={activePen.name} />
+            </div>
+            <div className="p-4 sm:p-6">
+              <div aria-live="polite">
+                <p className="text-xs font-semibold text-slate-300">{activePen.archetype}</p>
+                <h3 className="mt-1 font-display text-4xl font-bold leading-none text-white">{activePen.name}</h3>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-300">{activePen.handlingSummary}</p>
+                <p className="mt-4 flex items-start gap-2 text-sm text-amber-100">
+                  <LockKeyhole className="mt-0.5 size-4 shrink-0" aria-hidden="true" />{activePen.unlockPath}
                 </p>
-                {(
-                  [
-                    { label: 'Desk Weight & Stability', value: activePen.attributes.weight },
-                    { label: 'Aim & Spin Control', value: activePen.attributes.control },
-                    { label: 'Collision Momentum', value: activePen.attributes.impact },
-                  ] as const
-                ).map((stat) => (
-                  <div key={stat.label} className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-[#CBD5E1]">{stat.label}</span>
-                      <span className="font-mono tabular-nums text-[#94A3B8]">{stat.value}/100</span>
+              </div>
+              <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4" aria-label="Illustrative handling ratings">
+                {([
+                  ['Stability', activePen.attributes.weight],
+                  ['Control', activePen.attributes.control],
+                  ['Impact', activePen.attributes.impact],
+                ] as const).map(([label, value]) => (
+                  <div key={label}>
+                    <div className="flex flex-wrap items-end justify-between gap-x-1 text-xs text-slate-300">
+                      <span>{label}</span><span className="font-mono">{value}</span>
                     </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.07]">
-                      <div
-                        className="h-full rounded-full transition-all duration-200"
-                        style={{
-                          width: `${stat.value}%`,
-                          backgroundColor: activePen.accentHex,
-                        }}
-                      />
+                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+                      <div className="h-full rounded-full bg-[var(--pen-accent)] motion-safe:transition-[width]" style={{ width: `${value}%` }} />
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div className="mt-8 border-t border-white/[0.08] pt-5 text-sm text-[#94A3B8]">
-              <span className="font-semibold text-[#E2E8F0]">How to unlock: </span>
-              {activePen.unlockPath}
+              <div className="mt-5 rounded-xl border border-white/10 bg-[#0B111B] p-3 sm:p-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Same hit, different slide</h4>
+                    <p className="mt-1 text-xs text-slate-300">Illustrative stability comparison with the starter.</p>
+                  </div>
+                  <button type="button" onClick={() => setTest(test + 1)}
+                    className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-sky-200/25 px-3 text-xs font-semibold text-sky-100 hover:bg-sky-300/10">
+                    {test ? 'Replay hit' : 'Test the hit'}<ArrowRight className="size-3.5" aria-hidden="true" />
+                  </button>
+                </div>
+                <div key={test} className="mt-3 space-y-2" aria-hidden="true">
+                  {[starter, activePen].map((pen, index) => {
+                    const slide = 44 / pen.impactResistance;
+                    return (
+                      <div key={index} className="relative h-6 overflow-hidden rounded-md border border-white/10 bg-white/[0.04]">
+                        <span className="absolute inset-y-0 left-2 flex items-center text-[10px] text-slate-300">{index === 0 ? 'Starter' : 'Selected'}</span>
+                        <span className={`garage-test-pen absolute left-[27%] top-[calc(50%-3px)] h-1.5 w-[14%] rounded-full ${test ? 'garage-test-slide' : ''}`}
+                          style={{ backgroundColor: pen.accentHex, '--slide-distance': `${slide / 0.14}%` } as CSSProperties} />
+                      </div>
+                    );
+                  })}
+                </div>
+                <p role="status" className="mt-2 min-h-4 text-xs text-slate-300">
+                  {test > 0 && (activePen.id === starter.id ? 'Both runs show the same starter pen. Select another pen to compare.' : `${activePen.name} slides ${slideDirection} under the same hit.`)}
+                </p>
+              </div>
             </div>
           </div>
         </div>

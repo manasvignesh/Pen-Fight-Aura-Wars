@@ -1,8 +1,15 @@
 import { useState } from 'react';
-import { CalendarDays, ChartNoAxesColumnIncreasing, ChevronRight, Wrench } from 'lucide-react';
+import { CalendarDays, ChartNoAxesColumnIncreasing, ChevronRight, Play, Wrench } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 const captures = [
+  {
+    id: 'replay', icon: Play, title: 'Tournament Replay',
+    headline: 'Watch a tournament ring-out.',
+    description: 'Watch the follow-up flick catch the rival pen and send it off the edge.',
+    alt: 'Pen Fight Aura Wars Tournament gameplay replay',
+    frame: 'from-sky-400/15', focus: '',
+  },
   {
     id: 'weekly', icon: CalendarDays, title: 'Weekly Tournament',
     headline: 'Go for a Clean Sweep.',
@@ -40,7 +47,7 @@ export function GameplayShowcase() {
         </div>
         <div className="mt-7 grid overflow-hidden rounded-2xl border border-white/10 bg-[#101620] lg:grid-cols-2 lg:grid-rows-2">
           <div className="min-w-0 p-4 sm:p-7 lg:flex lg:flex-col lg:justify-end lg:p-10">
-            <div role="group" aria-label="Choose a game screen" className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1 lg:gap-2.5">
+            <div role="group" aria-label="Choose a game screen" className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 lg:gap-2.5">
               {captures.map((capture) => {
                 const { icon: Icon, id, title } = capture;
                 const selected = active.id === id;
@@ -60,13 +67,21 @@ export function GameplayShowcase() {
           </div>
           <div id="gameplay-preview" className="contents">
             <div aria-live="polite" className="px-4 pb-6 sm:px-7 lg:col-start-1 lg:row-start-2 lg:px-10 lg:pb-10">
-              <h3 className="max-w-md font-display text-3xl font-bold leading-tight text-white sm:text-4xl">{active.headline}</h3>
+              <h3 key={active.id} className="gallery-reveal max-w-md font-display text-3xl font-bold leading-tight text-white sm:text-4xl">{active.headline}</h3>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-300 sm:text-base">{active.description}</p>
             </div>
             <figure className={`grid place-items-center border-t border-white/10 bg-linear-to-b ${active.frame} to-[#0A101A] px-4 py-6 sm:py-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:border-t-0 lg:border-l lg:py-10`}>
-              <img src={`/media/${active.id}.jpg`} alt={active.alt} width={390} height={844}
+              {active.id === 'replay' ? (
+                <video className="gallery-reveal aspect-[9/16] w-full max-w-[270px] rounded-xl border border-white/15 bg-slate-950 shadow-2xl"
+                  controls playsInline muted preload="metadata" poster="/media/arena-poster.jpg" aria-label={active.alt}>
+                  <source src="/media/arena.webm" type="video/webm" />
+                  <source src="/media/arena.mp4" type="video/mp4" />
+                </video>
+              ) : (
+                <img key={active.id} src={`/media/${active.id}.jpg`} alt={active.alt} width={390} height={844}
                 loading="lazy" decoding="async"
-                className={`aspect-[5/9] h-auto w-full max-w-[270px] rounded-xl border border-white/15 bg-[#0A101A] object-cover shadow-2xl sm:max-w-[295px] ${active.focus}`} />
+                className={`gallery-reveal aspect-[5/9] h-auto w-full max-w-[270px] rounded-xl border border-white/15 bg-[#0A101A] object-cover shadow-2xl sm:max-w-[295px] ${active.focus}`} />
+              )}
             </figure>
           </div>
         </div>
