@@ -8,8 +8,8 @@
 
 @layer base {
   html {
-    background-color: #090b10;
-    color: #f1f5f9;
+    background-color: var(--site-ink);
+    color: var(--site-text);
     font-family: var(--font-sans);
   }
 
@@ -20,17 +20,9 @@
   }
 
   :focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid var(--site-accent);
     outline-offset: 2px;
   }
-}
-
-/* Subtle desk surface texture overlay without distracting glow or clutter */
-.desk-grain-surface {
-  background-image:
-    radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.08), transparent 45%),
-    radial-gradient(circle at 85% 10%, rgba(234, 179, 8, 0.06), transparent 40%),
-    linear-gradient(180deg, #0d1017 0%, #090b10 100%);
 }
 
 @keyframes auraDrift {
@@ -57,68 +49,6 @@
   html {
     scroll-behavior: auto;
   }
-}
-
-/* The worn bench fades out before reaching the homepage content column. */
-@media (min-width: 80rem) {
-  .classroom-gutters {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .classroom-gutters::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.22;
-    background: url("./assets/images/classroom-bench.webp") center / cover no-repeat;
-    mask-image: linear-gradient(
-      to right,
-      black,
-      transparent calc(50% - 35.5rem),
-      transparent calc(50% + 35.5rem),
-      black
-    );
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .spotlight-card-light {
-    transition: opacity 200ms ease-out;
-  }
-
-  .gallery-reveal {
-    animation: gallery-reveal 240ms ease-out both;
-  }
-}
-
-@media (hover: none), (prefers-reduced-motion: reduce) {
-  .spotlight-card-light {
-    display: none;
-  }
-}
-
-@keyframes gallery-reveal {
-  from {
-    opacity: 0.6;
-    transform: translateY(5px);
-  }
-}
-
-.flick-desk {
-  background:
-    linear-gradient(rgba(35, 20, 17, 0.31), rgba(20, 14, 11, 0.42)),
-    url("./assets/images/classroom-bench.webp") center / cover;
-}
-
-.garage-stage {
-  background:
-    radial-gradient(ellipse at center, color-mix(in srgb, var(--pen-accent) 21%, transparent), transparent 70%),
-    repeating-linear-gradient(0deg, transparent 0 23px, #ffffff09 23px 24px),
-    repeating-linear-gradient(90deg, transparent 0 23px, #ffffff09 23px 24px),
-    #0B111B;
 }
 
 .garage-test-slide {
@@ -148,4 +78,529 @@
 @keyframes flick-spark {
   from { opacity: 1; transform: translateX(3px); }
   to { opacity: 0; transform: translateX(24px) scaleX(0.2); }
+}
+
+:root {
+  --site-ink: #1b1c29;
+  --site-panel: #262538;
+  --site-rule: #72574094;
+  --site-text: #fff2dd;
+  --site-muted: #d8c9be;
+  --site-accent: #f1c586;
+}
+
+.site-editorial-width {
+  width: min(calc(100% - 2.5rem), 73rem);
+  margin-inline: auto;
+}
+
+.game-section {
+  scroll-margin-top: 5rem;
+  border-top: 1px solid var(--site-rule);
+  background: var(--site-ink);
+  color: var(--site-text);
+  padding-block: clamp(3rem, 6vw, 6rem);
+}
+
+.editorial-heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6.3vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 0.93;
+}
+
+.game-frame {
+  border: 1px solid var(--site-rule);
+  border-radius: 1rem;
+  background: var(--site-panel);
+}
+
+.game-selector {
+  border: 1px solid var(--site-rule);
+  border-radius: 0.5rem;
+  color: var(--site-muted);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.game-selector:hover {
+  color: var(--site-text);
+  background: #ffffff0a;
+}
+
+.game-selector[aria-pressed="true"] {
+  background: #ffd37d10;
+  color: var(--site-accent);
+  border-color: #ffd37d66;
+}
+
+.mode-composition,
+.replay-stage,
+.garage-catalog-stage {
+  background-color: #142039;
+  background-image:
+    radial-gradient(ellipse at 54% 34%, #263c60bd, transparent 70%),
+    linear-gradient(155deg, #24385866, #101725);
+}
+
+.mode-composition::before,
+.garage-catalog-stage::before {
+  content: "";
+  position: absolute;
+  inset: 11% 8%;
+  z-index: -1;
+  border: 1px solid #afc7ff35;
+  border-radius: 0.7rem;
+  background-image:
+    linear-gradient(to right, #afc7ff12 1px, transparent 1px),
+    linear-gradient(to bottom, #afc7ff12 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.garage-catalog-stage {
+  background-image:
+    radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--pen-accent) 21%, transparent), transparent 60%),
+    linear-gradient(155deg, #202f49, #101725);
+}
+
+@media (min-width: 48rem) {
+  .site-editorial-width {
+    width: min(calc(100% - 4rem), 73rem);
+  }
+}
+
+@media (min-width: 64rem) {
+  .mode-selector {
+    border: 0;
+    border-bottom: 1px solid var(--site-rule);
+    border-radius: 0;
+  }
+
+  .mode-selector[aria-pressed="true"] {
+    box-shadow: inset 3px 0 var(--site-accent);
+    border-bottom-color: var(--site-rule);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .editorial-reveal {
+    animation: editorial-reveal 220ms ease-out both;
+  }
+}
+
+@keyframes editorial-reveal {
+  from { opacity: 0.63; }
+}
+
+.textile-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.textile-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("/media/portraits/sanganer-buti.webp") center top / 490px auto repeat;
+  opacity: 0.21;
+  mask-image: linear-gradient(90deg, #000, transparent 25%, transparent 75%, #000);
+}
+
+.rival-section {
+  background-color: #171b29;
+}
+
+.rival-section::before {
+  opacity: 0.32;
+  mask-image: linear-gradient(110deg, #000 0%, transparent 39%, transparent 68%, #000 100%);
+}
+
+.rival-fan {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.38rem, 1.35vw, 1.1rem);
+  padding: 0.85rem 0.4rem 1.2rem;
+  align-items: center;
+}
+
+.rival-portrait {
+  --portrait-angle: 0deg;
+  --portrait-drop: 0rem;
+  align-self: center;
+  position: relative;
+  z-index: 0;
+  min-width: 0;
+  overflow: clip;
+  border: 1px solid #c69b655e;
+  border-radius: 0.45rem;
+  background: #222132;
+  color: var(--site-text);
+  box-shadow: 0 0.9rem 2.25rem #03050c69;
+}
+
+.rival-portrait img {
+  aspect-ratio: 2 / 3;
+  height: auto;
+  background: #302a30;
+}
+
+.rival-portrait:first-child {
+  --portrait-angle: -5deg;
+  --portrait-drop: 0.65rem;
+}
+
+.rival-portrait:last-child {
+  --portrait-angle: 5deg;
+  --portrait-drop: 0.65rem;
+}
+
+.rival-portrait[aria-pressed="true"] {
+  z-index: 1;
+  border-color: #ffdc92;
+  color: #fff0cb;
+}
+
+.rival-name {
+  min-height: 2.55rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #302538, #202133);
+}
+
+.rival-portrait[aria-pressed="true"] .rival-name {
+  background: #573d36;
+}
+
+.download-finale {
+  overflow: hidden;
+  padding-block: clamp(4rem, 8vw, 8rem);
+  background:
+    radial-gradient(ellipse at 100% 48%, #55343e 0%, #281e32 37%, transparent 72%),
+    #121624;
+  border-top: 1px solid #8e694941;
+}
+
+.download-finale::before {
+  opacity: 0.44;
+  background-size: 575px auto;
+  mask-image: linear-gradient(90deg, transparent 20%, #000 72%);
+}
+
+.download-finale::after {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  pointer-events: none;
+  border: 1px solid #d0a06b3e;
+  outline: 1px solid #d0a06b20;
+  outline-offset: 4px;
+  z-index: -1;
+}
+
+.download-finale-content {
+  padding-inline: clamp(0.6rem, 3vw, 3rem);
+}
+
+.star-border {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+  border-radius: 0.56rem;
+  background: #684636;
+  padding: 2px;
+}
+
+.star-border-glint {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  width: 64%;
+  height: 55%;
+  left: -8%;
+  top: 0;
+  background: radial-gradient(ellipse, #fff7d9, transparent 70%);
+  opacity: 0;
+}
+
+.star-border-glint-reverse {
+  left: auto;
+  right: -8%;
+  top: auto;
+  bottom: 0;
+}
+
+.site-primary-action,
+.site-secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  gap: 0.65rem;
+  border-radius: 0.48rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.site-primary-action {
+  background: linear-gradient(155deg, #ffe1a2, #eab46c);
+  color: #201925;
+}
+
+.site-primary-action:hover {
+  background: #ffdfaa;
+}
+
+.site-secondary-action {
+  border: 1px solid #f1c48b68;
+  background: #171a2cb3;
+  color: #fce0b3;
+}
+
+.site-secondary-action:hover {
+  background: #443045;
+  color: #fff7e9;
+}
+
+.download-page-heading {
+  min-height: 12rem;
+  padding-block: 2.5rem;
+  background:
+    radial-gradient(ellipse at 90% 20%, #493445 0%, transparent 68%),
+    var(--site-ink);
+}
+
+@media (max-width: 47.999rem) {
+  .textile-section::before {
+    opacity: 0.14;
+    mask-image: linear-gradient(90deg, #000, transparent 37%, transparent 63%, #000);
+  }
+
+  .download-finale::before {
+    opacity: 0.28;
+    mask-image: linear-gradient(115deg, transparent 30%, #000);
+  }
+
+  .download-finale::after {
+    inset: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rival-portrait {
+    transform: translateY(var(--portrait-drop)) rotate(var(--portrait-angle));
+    transition: transform 240ms cubic-bezier(0.2, 0.8, 0.35, 1.25), border-color 200ms ease;
+  }
+
+  .rival-portrait:is(:hover, :focus-visible, [aria-pressed="true"]) {
+    transform: translateY(-0.32rem) rotate(0) scale(1.02);
+  }
+
+  .star-border:is(:hover, :focus-within) .star-border-glint {
+    animation: action-glint 720ms ease-out;
+  }
+
+  .star-border:is(:hover, :focus-within) .star-border-glint-reverse {
+    animation-name: action-glint-reverse;
+  }
+}
+
+@keyframes action-glint {
+  0% { opacity: 0; transform: translateX(0); }
+  48% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(78%); }
+}
+
+@keyframes action-glint-reverse {
+  0% { opacity: 0; transform: translateX(0); }
+  48% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-78%); }
+}
+
+.illustrated-hero {
+  background:
+    radial-gradient(ellipse at 84% 18%, #3c2935 0%, transparent 58%),
+    var(--site-ink);
+}
+
+.illustrated-hero::before {
+  opacity: 0.24;
+}
+
+.hero-art-frame {
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--site-rule);
+  border-radius: 0.65rem;
+  background: #342634;
+  box-shadow: 0 20px 58px #110f1b8a;
+}
+
+.hero-art-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0.5rem;
+  border: 1px solid #f2c19040;
+  border-radius: 0.25rem;
+  pointer-events: none;
+}
+
+.practice-section {
+  background:
+    radial-gradient(ellipse at 83% 42%, #243939 0%, transparent 67%),
+    var(--site-ink);
+}
+
+.page-masthead {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--site-rule);
+  border-radius: 0.55rem;
+  background:
+    linear-gradient(105deg, #242231 22%, #362a3d 68%, #45303d);
+  padding: clamp(1.35rem, 4vw, 3.2rem);
+}
+
+.page-masthead::before {
+  opacity: 0.24;
+  mask-image: linear-gradient(90deg, transparent 32%, #000 90%);
+}
+
+.site-reader {
+  background:
+    radial-gradient(ellipse at 50% 0%, #252332 0%, transparent 55rem),
+    var(--site-ink);
+}
+
+.site-reader::before {
+  opacity: 0.16;
+  mask-image: linear-gradient(90deg, #000, transparent 21%, transparent 79%, #000);
+}
+
+@media (min-width: 64rem) {
+  .hero-art-frame {
+    margin-left: -1.5rem;
+    aspect-ratio: 1.27;
+    mask-image: linear-gradient(90deg, transparent, #000 18%);
+  }
+}
+
+.poster-modes {
+  background: radial-gradient(ellipse at 76% 0%, #312338, transparent 64%), var(--site-ink);
+}
+
+.mode-composition {
+  background:
+    linear-gradient(147deg, #211e2cd9, #2e2439e5 65%, #222032eb),
+    url("/media/illustrations/match-notebook.webp") center / cover;
+}
+
+.poster-screenings {
+  background: radial-gradient(ellipse at 15% 50%, #293731, transparent 60%), var(--site-ink);
+}
+
+.replay-stage {
+  background:
+    linear-gradient(140deg, #253936b8, #1e2634f0),
+    url("/media/portraits/sanganer-buti.webp") center / 430px auto repeat,
+    #202b31;
+}
+
+.poster-catalog {
+  background: radial-gradient(ellipse at 30% 34%, #382b3b, transparent 65%), var(--site-ink);
+}
+
+.garage-catalog-stage {
+  background-image:
+    radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--pen-accent) 19%, transparent), transparent 58%),
+    linear-gradient(150deg, #3b2e3c, #211f2e);
+}
+
+.mode-composition::before,
+.garage-catalog-stage::before {
+  border-color: #e8b98347;
+  background-image:
+    linear-gradient(to right, #e8b98313 1px, transparent 1px),
+    linear-gradient(to bottom, #e8b98313 1px, transparent 1px);
+}
+
+.download-finale-art {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 auto;
+  width: min(68%, 1250px);
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% 55%;
+  mask-image: linear-gradient(90deg, transparent, #000 42%);
+}
+
+.download-finale::after {
+  z-index: 0;
+}
+
+.site-footer {
+  background: #191a27;
+}
+
+.site-footer::before {
+  opacity: 0.15;
+}
+
+.nav-download {
+  min-height: 2.55rem;
+  padding-block: 0.42rem;
+}
+
+@media (max-width: 47.999rem) {
+  .download-finale-art {
+    inset: 0 0 auto;
+    width: 100%;
+    height: 19rem;
+    object-position: 62% 44%;
+    mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+  }
+
+  .download-finale {
+    padding-top: 15.5rem;
+  }
+}
+
+@media (max-width: 39.999rem) {
+  .nav-download {
+    display: none;
+  }
+}
+
+.practice-console {
+  border-color: #a87b575e;
+  background: linear-gradient(145deg, #3a2834, #252333 68%);
+  box-shadow: 0 18px 42px #100e1a68;
+}
+
+.practice-arena {
+  background:
+    radial-gradient(ellipse at 50% 36%, #4c322b4d, transparent 69%),
+    #1c1a28;
+}
+
+.flick-desk {
+  border: 1px solid #dbac72a6;
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(140deg, #211d2555, #120f1a0c 55%, #241e2252),
+    url("/media/illustrations/practice-desk.webp") center / 100% 100%,
+    #273e43;
+  box-shadow: 0 4px 0 #503328, 0 9px 18px #100e1c;
+}
+
+.practice-pen-sprite {
+  filter: drop-shadow(0 4px 2px #140d1aa6);
+}
+
+.flick-action {
+  min-height: 2.75rem;
+  padding: 0.45rem 0.8rem;
 }

@@ -32,17 +32,17 @@ export function PrivacyPage() {
       }}
     >
       <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <header className="max-w-3xl border-b border-white/[0.08] pb-8">
-          <p className="text-sm font-medium text-[#60A5FA]">Google Play &amp; Player Privacy</p>
+        <header className="page-masthead textile-section">
+          <p className="text-sm font-medium text-[var(--site-accent)]">Google Play &amp; Player Privacy</p>
           <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             Privacy Policy
           </h1>
-          <p className="mt-3 text-base leading-relaxed text-[#B4BCCE]">
+          <p className="mt-3 text-base leading-relaxed text-[var(--site-muted)]">
             This Privacy Policy explains how <strong className="text-white">{siteConfig.appName}</strong> (Android package{' '}
             <code className="font-mono text-sm text-[#E2E8F0]">{siteConfig.packageName}</code>), published by{' '}
             <strong className="text-white">{siteConfig.publisherName}</strong>, collects, uses, processes, and protects information when you play our mobile game or visit this official website.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-[#94A3B8]">
+          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-[var(--site-muted)]">
             <span>
               Effective Date: <span className="text-[#E2E8F0]">{effectiveDate}</span>
             </span>
@@ -64,7 +64,7 @@ export function PrivacyPage() {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="block rounded-md px-2.5 py-1.5 text-xs text-[#94A3B8] transition-colors hover:bg-white/[0.04] hover:text-white"
+                  className="block rounded-md px-2.5 py-1.5 text-xs text-[var(--site-muted)] transition-colors hover:bg-white/[0.04] hover:text-white"
                 >
                   {item.label}
                 </a>
@@ -72,7 +72,7 @@ export function PrivacyPage() {
             </nav>
           </aside>
 
-          <article className="space-y-10 text-[15px] leading-relaxed text-[#CBD5E1] lg:col-span-9">
+          <article className="space-y-10 text-[15px] leading-relaxed text-[var(--site-muted)] lg:col-span-9">
             <section id="overview" className="scroll-mt-24 space-y-3">
               <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">
                 1. Overview &amp; Publisher Identity
@@ -95,7 +95,7 @@ export function PrivacyPage() {
                 Depending on the features you use (offline play vs. signed-in cloud play and online multiplayer), the game and its integrated third-party SDKs may collect or process the following categories of data:
               </p>
 
-              <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#11151F]">
+              <div className="overflow-x-auto rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)]">
                 <table className="w-full min-w-[560px] text-left text-sm">
                   <thead className="border-b border-white/10 bg-[#0D1119] text-xs font-semibold text-white">
                     <tr>
@@ -104,7 +104,7 @@ export function PrivacyPage() {
                       <th className="px-4 py-3">Primary Purpose</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/[0.07] text-xs leading-relaxed text-[#CBD5E1]">
+                  <tbody className="divide-y divide-white/[0.07] text-xs leading-relaxed text-[var(--site-muted)]">
                     <tr>
                       <td className="px-4 py-3 font-medium text-white">Account &amp; Authentication</td>
                       <td className="px-4 py-3">
@@ -162,7 +162,7 @@ export function PrivacyPage() {
               <p>
                 {siteConfig.appName} supports optional or account-based sign-in through <strong>Google Sign-In</strong> integrated with <strong>Supabase Authentication</strong>. When you choose to sign in with Google:
               </p>
-              <ul className="list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>
                   Google authenticates your identity and provides an authentication credential to Supabase Auth so you do not need to create a separate game password. We never receive or store your Google password.
                 </li>
@@ -200,7 +200,7 @@ export function PrivacyPage() {
               <p>
                 {siteConfig.appName} integrates the <strong>Google Mobile Ads (AdMob) SDK</strong> to display in-app advertisements. Consistent with Google&apos;s official Google Play Data Disclosure documentation for the Mobile Ads SDK, AdMob automatically collects and shares certain data over encrypted TLS connections for advertising, analytics, and fraud prevention:
               </p>
-              <ul className="list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>
                   <strong>Approximate Location (via IP Address):</strong> Used to estimate general geographic region for ad relevance and compliance.
                 </li>
@@ -217,13 +217,13 @@ export function PrivacyPage() {
               <p>
                 <strong>Advertising Personalization &amp; Consent:</strong> Where required by law (such as in the European Economic Area, the United Kingdom, or applicable US states), consent choices apply to personalized versus non-personalized ads through Google&apos;s User Messaging Platform (UMP) or equivalent consent frameworks. You can also opt out of ad personalization or reset/delete your Advertising ID at any time in your Android device settings under <strong>Settings → Google → Ads</strong>.
               </p>
-              <p className="text-sm text-[#94A3B8]">
+              <p className="text-sm text-[var(--site-muted)]">
                 Learn how Google uses data from apps using AdMob at{' '}
                 <a
                   href="https://policies.google.com/technologies/partner-sites"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                  className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
                 >
                   policies.google.com/technologies/partner-sites
                 </a>
@@ -238,7 +238,7 @@ export function PrivacyPage() {
               <p>
                 We do not sell your personal information to data brokers. We share or transmit data only with the infrastructure and service providers required to operate the game, or where required by law:
               </p>
-              <ul className="list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>
                   <strong>Google LLC (Google Sign-In &amp; Google Play Services):</strong> Authentication and Android platform services.
                 </li>
@@ -279,7 +279,7 @@ export function PrivacyPage() {
               <p>
                 We retain account and gameplay data only for as long as necessary to provide your game account, preserve your cloud progress, maintain leaderboard integrity, prevent abuse, and satisfy legal obligations:
               </p>
-              <ul className="list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>
                   <strong>Active Accounts &amp; Cloud Saves:</strong> Retained while your account remains active until you request deletion.
                 </li>
@@ -306,7 +306,7 @@ export function PrivacyPage() {
                 Full step-by-step instructions, verification safeguards, and a breakdown of deleted versus retained records are published on our dedicated{' '}
                 <Link
                   to="/delete-account"
-                  className="font-semibold text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                  className="font-semibold text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
                 >
                   Account &amp; Data Deletion page (/delete-account)
                 </Link>
@@ -321,7 +321,7 @@ export function PrivacyPage() {
               <p>
                 Depending on your country or state of residence (such as the EEA, UK, California, India, or other jurisdictions with data protection laws), you may have rights to:
               </p>
-              <ul className="list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>Request access to the personal information we hold about your game account.</li>
                 <li>Request correction of inaccurate profile information (such as your display name).</li>
                 <li>Request deletion of your account and associated cloud data.</li>
@@ -332,7 +332,7 @@ export function PrivacyPage() {
                 To exercise any privacy right, email{' '}
                 <a
                   href={`mailto:${siteConfig.supportEmail}`}
-                  className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                  className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
                 >
                   {siteConfig.supportEmail}
                 </a>
@@ -351,7 +351,7 @@ export function PrivacyPage() {
                 If you are a parent or legal guardian and believe a child has created an account or provided personal information without appropriate consent, contact us at{' '}
                 <a
                   href={`mailto:${siteConfig.supportEmail}`}
-                  className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                  className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
                 >
                   {siteConfig.supportEmail}
                 </a>{' '}
@@ -384,7 +384,7 @@ export function PrivacyPage() {
               <p>
                 If you have questions about this Privacy Policy, Google Play Data Safety disclosures, or how your data is handled in {siteConfig.appName}:
               </p>
-              <div className="rounded-xl border border-white/10 bg-[#11151F] p-5 text-sm">
+              <div className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-5 text-sm">
                 <p>
                   <strong className="text-white">Publisher:</strong> {siteConfig.publisherName}
                 </p>
@@ -396,7 +396,7 @@ export function PrivacyPage() {
                   <strong className="text-white">Privacy &amp; Support Email:</strong>{' '}
                   <a
                     href={`mailto:${siteConfig.supportEmail}`}
-                    className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                    className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
                   >
                     {siteConfig.supportEmail}
                   </a>
@@ -405,7 +405,7 @@ export function PrivacyPage() {
                   <strong className="text-white">Account Deletion Page:</strong>{' '}
                   <Link
                     to="/delete-account"
-                    className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                    className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
                   >
                     /delete-account
                   </Link>

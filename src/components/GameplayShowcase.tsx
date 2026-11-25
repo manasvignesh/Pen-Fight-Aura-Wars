@@ -1,88 +1,76 @@
 import { useState } from 'react';
-import { CalendarDays, ChartNoAxesColumnIncreasing, ChevronRight, Play, Wrench } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 const captures = [
   {
-    id: 'replay', icon: Play, title: 'Tournament Replay',
-    headline: 'Watch a tournament ring-out.',
-    description: 'Watch the follow-up flick catch the rival pen and send it off the edge.',
+    id: 'replay', title: 'Tournament Replay',
+    headline: 'One flick changes the round.',
+    description: 'Watch the follow-up flick catch the rival and send it off the desk.',
     alt: 'Pen Fight Aura Wars Tournament gameplay replay',
-    frame: 'from-sky-400/15', focus: '',
   },
   {
-    id: 'weekly', icon: CalendarDays, title: 'Weekly Tournament',
-    headline: 'Go for a Clean Sweep.',
-    description: 'Fight through the opener, semifinal, and final. A 2–0 score in every match earns the Clean Sweep bonus.',
-    alt: 'Weekly Tournament bracket with three rivals and the Clean Sweep bonus',
-    frame: 'from-amber-400/15', focus: 'object-[50%_76%]',
+    id: 'weekly', title: 'Weekly Bracket',
+    headline: 'Three rivals. One clean sweep.',
+    description: 'Fight through the opener, semifinal, and final. Go 2–0 in every match for the Clean Sweep bonus.',
+    alt: 'Weekly Tournament bracket with three rivals and the Clean Sweep challenge',
   },
   {
-    id: 'garage', icon: Wrench, title: 'Pen Garage',
-    headline: 'Tune your pen for Tournament.',
-    description: 'Spend Aura Points on grip and nib upgrades. The Workbench shows what each upgrade changes before you buy it.',
-    alt: 'Pen Garage Workbench with the Classic Ballpoint and its grip and nib upgrade options',
-    frame: 'from-sky-400/15', focus: 'object-bottom',
+    id: 'garage', title: 'Upgrades',
+    headline: 'Find the right upgrade.',
+    description: 'Improve the grip or nib of a pen you own. The Workbench shows what each upgrade changes before you spend Aura Points.',
+    alt: 'Pen Garage Workbench with the Classic Ballpoint and grip and nib upgrades',
   },
   {
-    id: 'progress', icon: ChartNoAxesColumnIncreasing, title: 'Your Progress',
-    headline: 'See what it takes to unlock your next pen.',
-    description: 'Check your rivals defeated, Aura Points, and unlock requirements. Sign in with Google to back up your Tournament progress.',
-    alt: 'Progress screen showing the equipped pen, rivals defeated, and requirements for the next pen',
-    frame: 'from-emerald-400/15', focus: 'object-[50%_71%]',
+    id: 'progress', title: 'Progress',
+    headline: 'See your next unlock.',
+    description: 'Check the rivals you’ve defeated, your Aura Points, and what it takes to earn the next pen.',
+    alt: 'Progress screen showing Aura Points, rivals defeated, and the next pen unlock',
   },
 ];
 
 export function GameplayShowcase() {
   const [active, setActive] = useState(captures[0]);
   const trailerUrl = siteConfig.media.trailerUrl;
-
   return (
-    <section id="showcase" aria-labelledby="showcase-heading" className="scroll-mt-20 bg-[#0B1019] px-5 py-14 sm:px-8 sm:py-20">
-      <div className="mx-auto max-w-[1136px]">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 id="showcase-heading" className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">Inside the game</h2>
-          {trailerUrl && <a href={trailerUrl} target="_blank" rel="noopener noreferrer"
-            className="py-2 text-sm font-semibold text-sky-200 hover:underline">Watch the trailer</a>}
-        </div>
-        <div className="mt-7 grid overflow-hidden rounded-2xl border border-white/10 bg-[#101620] lg:grid-cols-2 lg:grid-rows-2">
-          <div className="min-w-0 p-4 sm:p-7 lg:flex lg:flex-col lg:justify-end lg:p-10">
-            <div role="group" aria-label="Choose a game screen" className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1 lg:gap-2.5">
-              {captures.map((capture) => {
-                const { icon: Icon, id, title } = capture;
-                const selected = active.id === id;
-                return (
-                  <button key={id} type="button" aria-pressed={selected} aria-controls="gameplay-preview"
-                    onClick={() => setActive(capture)}
-                    className={`flex min-h-12 items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-sm font-semibold transition-colors sm:px-4 ${selected
-                      ? 'border-amber-300/45 bg-amber-300/10 text-amber-200'
-                      : 'border-white/10 bg-[#0D121C] text-slate-300 hover:border-white/30 hover:text-white'}`}>
-                    <Icon className="size-4 shrink-0" aria-hidden="true" />
-                    {title}
-                    <ChevronRight className="ml-auto hidden size-4 shrink-0 lg:block" aria-hidden="true" />
-                  </button>
-                );
-              })}
-            </div>
+    <section id="showcase" aria-labelledby="showcase-heading" className="game-section textile-section poster-screenings">
+      <div className="site-editorial-width grid items-center gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:gap-12">
+        <div className="min-w-0 lg:col-start-2 lg:row-start-1">
+          <h2 id="showcase-heading" className="editorial-heading">Inside the game</h2>
+          <div role="group" aria-label="Choose a game screen" className="mt-6 grid grid-cols-2 gap-1.5 lg:grid-cols-1 lg:gap-2">
+            {captures.map((capture) => (
+              <button key={capture.id} type="button" aria-pressed={active.id === capture.id} aria-controls="gameplay-preview"
+                onClick={() => setActive(capture)}
+                className="game-selector group flex min-h-13 w-full items-center justify-between gap-2 px-3 py-2 text-left text-xs font-bold sm:text-sm">
+                <span className="flex items-center gap-3">
+                  {capture.id === 'replay' && <Play className="size-4 shrink-0" aria-hidden="true" />}
+                  {capture.title}
+                </span>
+                <ArrowRight className="hidden size-4 shrink-0 opacity-0 lg:block motion-safe:transition-opacity group-aria-pressed:opacity-100 group-hover:opacity-100" aria-hidden="true" />
+              </button>
+            ))}
           </div>
-          <div id="gameplay-preview" className="contents">
-            <div aria-live="polite" className="px-4 pb-6 sm:px-7 lg:col-start-1 lg:row-start-2 lg:px-10 lg:pb-10">
-              <h3 key={active.id} className="gallery-reveal max-w-md font-display text-3xl font-bold leading-tight text-white sm:text-4xl">{active.headline}</h3>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-300 sm:text-base">{active.description}</p>
-            </div>
-            <figure className={`grid place-items-center border-t border-white/10 bg-linear-to-b ${active.frame} to-[#0A101A] px-4 py-6 sm:py-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:border-t-0 lg:border-l lg:py-10`}>
+          {trailerUrl && <a href={trailerUrl} target="_blank" rel="noopener noreferrer"
+            className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--site-accent)] hover:underline">Watch the trailer</a>}
+        </div>
+        <div id="gameplay-preview" className="game-frame min-w-0 overflow-hidden lg:col-start-1 lg:row-start-1">
+          <figure className="replay-stage relative grid min-h-0 place-items-center overflow-hidden px-4 py-6 sm:py-8">
+            <div key={active.id} className="editorial-reveal relative w-full max-w-[270px] overflow-hidden rounded-[1.9rem] border border-white/25 bg-[#06080b] p-1.5 shadow-[0_28px_70px_#000b] sm:max-w-[265px]">
               {active.id === 'replay' ? (
-                <video className="gallery-reveal aspect-[9/16] w-full max-w-[270px] rounded-xl border border-white/15 bg-slate-950 shadow-2xl"
-                  controls playsInline muted preload="metadata" poster="/media/arena-poster.jpg" aria-label={active.alt}>
+                <video className="block aspect-[9/16] w-full rounded-[1.5rem] object-contain" controls playsInline muted
+                  preload="none" poster="/media/arena-poster.jpg" aria-label={active.alt}>
                   <source src="/media/arena.webm" type="video/webm" />
                   <source src="/media/arena.mp4" type="video/mp4" />
                 </video>
               ) : (
-                <img key={active.id} src={`/media/${active.id}.jpg`} alt={active.alt} width={390} height={844}
-                loading="lazy" decoding="async"
-                className={`gallery-reveal aspect-[5/9] h-auto w-full max-w-[270px] rounded-xl border border-white/15 bg-[#0A101A] object-cover shadow-2xl sm:max-w-[295px] ${active.focus}`} />
+                <img src={`/media/${active.id}.jpg`} alt={active.alt} width={390} height={844} loading="lazy"
+                  className="block aspect-[9/16] h-auto w-full rounded-[1.5rem] object-cover object-center" />
               )}
-            </figure>
+            </div>
+          </figure>
+          <div aria-live="polite" className="grid gap-2 border-t border-[var(--site-rule)] px-4 py-5 sm:px-6">
+            <h3 className="font-display text-3xl font-bold leading-none sm:text-4xl">{active.headline}</h3>
+            <p className="text-sm leading-relaxed text-[var(--site-muted)]">{active.description}</p>
           </div>
         </div>
       </div>

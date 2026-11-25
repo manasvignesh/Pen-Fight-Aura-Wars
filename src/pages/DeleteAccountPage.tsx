@@ -80,14 +80,14 @@ export function DeleteAccountPage() {
       }}
     >
       <div className="mx-auto max-w-[1000px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <header className="max-w-3xl border-b border-white/[0.08] pb-8">
-          <p className="text-sm font-medium text-[#60A5FA]">
+        <header className="page-masthead textile-section">
+          <p className="text-sm font-medium text-[var(--site-accent)]">
             Google Play User Data Compliance · {siteConfig.publisherName}
           </p>
           <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             Account &amp; Data Deletion
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-[#B4BCCE]">
+          <p className="mt-4 text-base leading-relaxed text-[var(--site-muted)]">
             This page explains how players of <strong className="text-white">{siteConfig.appName}</strong> (package{' '}
             <code className="font-mono text-sm text-[#E2E8F0]">{siteConfig.packageName}</code>), published by{' '}
             <strong className="text-white">{siteConfig.publisherName}</strong>, can permanently delete their game account and associated personal data.
@@ -111,15 +111,15 @@ export function DeleteAccountPage() {
         </div>
 
         <section aria-labelledby="how-to-delete" className="mt-10">
-          <div className="rounded-xl border border-white/10 bg-[#11151F] p-6">
+          <div className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6">
             <h2 id="how-to-delete" className="font-display text-2xl font-bold text-white">
               Request account deletion by email
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#CBD5E1]">
+            <p className="mt-3 text-sm leading-relaxed text-[var(--site-muted)]">
               Use the request composer below to open a draft in your email app, or write to{' '}
               <a
                 href={`mailto:${siteConfig.supportEmail}?subject=${encodeURIComponent('[Account Deletion Request] Pen Fight Aura Wars')}`}
-                className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
               >
                 {siteConfig.supportEmail}
               </a>{' '}
@@ -131,15 +131,15 @@ export function DeleteAccountPage() {
         {/* Security Warning Banner */}
         <section
           aria-labelledby="security-check-heading"
-          className="mt-8 rounded-xl border border-white/10 bg-[#10141E] p-6"
+          className="mt-8 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6"
         >
           <div className="flex items-start gap-3">
-            <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[#60A5FA]" aria-hidden="true" />
-            <div className="space-y-1.5 text-sm text-[#CBD5E1]">
+            <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[var(--site-accent)]" aria-hidden="true" />
+            <div className="space-y-1.5 text-sm text-[var(--site-muted)]">
               <h2 id="security-check-heading" className="font-semibold text-white">
                 How We Prevent Unauthorized Deletion Requests
               </h2>
-              <p className="leading-relaxed text-[#B4BCCE]">
+              <p className="leading-relaxed text-[var(--site-muted)]">
                 To protect players from malicious third-party deletion attempts, you must send your deletion email from (or reply to a confirmation message sent to) the exact email address associated with your Google Sign-In / Supabase account. We will <strong>never</strong> ask for your Google password, recovery codes, or OAuth tokens.
               </p>
             </div>
@@ -149,7 +149,7 @@ export function DeleteAccountPage() {
         {/* Interactive Deletion Request Composer */}
         <section
           aria-labelledby="composer-heading"
-          className="mt-10 rounded-xl border border-white/10 bg-[#11151F] p-6 sm:p-8"
+          className="mt-10 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6 sm:p-8"
         >
           <div className="flex items-center gap-2.5">
             <Trash2 className="h-5 w-5 text-[#EAB308]" aria-hidden="true" />
@@ -157,7 +157,7 @@ export function DeleteAccountPage() {
               Prepare Account Deletion Request
             </h2>
           </div>
-          <p className="mt-2 text-sm leading-relaxed text-[#94A3B8]">
+          <p className="mt-2 text-sm leading-relaxed text-[var(--site-muted)]">
             Fill in your account identifiers below to generate a pre-formatted email for your mail app (or copy the request text directly). All validation runs locally in your browser.
           </p>
 
@@ -189,7 +189,7 @@ export function DeleteAccountPage() {
                   placeholder="player@example.com"
                   aria-invalid={Boolean(errors.accountEmail)}
                   aria-describedby={errors.accountEmail ? 'deletion-email-error' : undefined}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
                 {errors.accountEmail && (
                   <p id="deletion-email-error" className="mt-1.5 text-xs text-red-300">
@@ -214,7 +214,7 @@ export function DeleteAccountPage() {
                   placeholder="Your leaderboard username"
                   aria-invalid={Boolean(errors.playerName)}
                   aria-describedby={errors.playerName ? 'deletion-name-error' : undefined}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
                 {errors.playerName && (
                   <p id="deletion-name-error" className="mt-1.5 text-xs text-red-300">
@@ -238,7 +238,7 @@ export function DeleteAccountPage() {
                   value={userId}
                   onChange={(e) => setUserId(e.target.value)}
                   placeholder="Optional profile ID if visible in-app"
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 font-mono text-sm text-white placeholder:font-sans placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 font-mono text-sm text-white placeholder:font-sans placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
               </div>
 
@@ -255,18 +255,18 @@ export function DeleteAccountPage() {
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                   placeholder="Optional feedback"
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
               </div>
             </div>
 
             <div className="space-y-3 border-t border-white/[0.08] pt-4">
-              <label className="flex items-start gap-3 text-sm text-[#CBD5E1]">
+              <label className="flex items-start gap-3 text-sm text-[var(--site-muted)]">
                 <input
                   type="checkbox"
                   checked={confirmedOwnership}
                   onChange={(e) => setConfirmedOwnership(e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-white/25 bg-[#090B10] text-[#2563EB]"
+                  className="mt-1 h-4 w-4 rounded border-white/25 bg-[var(--site-ink)] accent-[var(--site-accent)]"
                 />
                 <span>
                   I confirm I own this account and can verify my request using the linked email address above.
@@ -276,12 +276,12 @@ export function DeleteAccountPage() {
                 <p className="pl-7 text-xs text-red-300">{errors.confirmedOwnership}</p>
               )}
 
-              <label className="flex items-start gap-3 text-sm text-[#CBD5E1]">
+              <label className="flex items-start gap-3 text-sm text-[var(--site-muted)]">
                 <input
                   type="checkbox"
                   checked={confirmedPermanent}
                   onChange={(e) => setConfirmedPermanent(e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded border-white/25 bg-[#090B10] text-[#2563EB]"
+                  className="mt-1 h-4 w-4 rounded border-white/25 bg-[var(--site-ink)] accent-[var(--site-accent)]"
                 />
                 <span>
                   I understand account deletion is permanent and removes my cloud saves, Aura Rating, leaderboard profile, and unlocked virtual pens.
@@ -295,7 +295,7 @@ export function DeleteAccountPage() {
             <div className="pt-2">
               <button
                 type="submit"
-                className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#3B82F6]"
+                className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-lg bg-[var(--site-accent)] px-6 py-2.5 text-sm font-semibold text-[#241b1a] transition-colors hover:bg-[#ffe1b3]"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 <span>Generate Verified Deletion Email</span>
@@ -306,12 +306,12 @@ export function DeleteAccountPage() {
           {preparedMailto && (
             <div
               role="status"
-              className="mt-6 rounded-xl border border-[#3B82F6]/35 bg-[#131C2E] p-5"
+              className="mt-6 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-5"
             >
               <p className="text-sm font-semibold text-white">
                 Deletion Request Email Ready
               </p>
-              <p className="mt-1.5 text-xs leading-relaxed text-[#CBD5E1]">
+              <p className="mt-1.5 text-xs leading-relaxed text-[var(--site-muted)]">
                 Click below to open your email client and send the request from{' '}
                 <strong className="text-white">{accountEmail}</strong> to{' '}
                 <strong className="text-white">{siteConfig.supportEmail}</strong>. Your account is not deleted until we receive and verify your email.
@@ -319,7 +319,7 @@ export function DeleteAccountPage() {
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
                   href={preparedMailto}
-                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#3B82F6]"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-[var(--site-accent)] px-5 py-2.5 text-sm font-semibold text-[#241b1a] transition-colors hover:bg-[#ffe1b3]"
                 >
                   <Mail className="h-4 w-4" aria-hidden="true" />
                   <span>Open Email App &amp; Send Request</span>
@@ -331,7 +331,7 @@ export function DeleteAccountPage() {
                 >
                   {copiedSummary ? (
                     <>
-                      <Check className="h-4 w-4 text-[#60A5FA]" aria-hidden="true" />
+                      <Check className="h-4 w-4 text-[var(--site-accent)]" aria-hidden="true" />
                       <span>Copied Request Text</span>
                     </>
                   ) : (
@@ -351,11 +351,11 @@ export function DeleteAccountPage() {
           aria-labelledby="data-scope-heading"
           className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2"
         >
-          <div className="rounded-xl border border-white/10 bg-[#11151F] p-6">
+          <div className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6">
             <h2 id="data-scope-heading" className="font-display text-2xl font-bold text-white">
               Data Permanently Deleted
             </h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#B4BCCE]">
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--site-muted)]">
               <li>Supabase Authentication record (user ID and linked Google Sign-In email).</li>
               <li>Player profile, in-game display name, and leaderboard standings.</li>
               <li>Cloud-saved gameplay progress, Aura Points, achievements, and unlocked pens.</li>
@@ -363,11 +363,11 @@ export function DeleteAccountPage() {
             </ul>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-[#11151F] p-6">
+          <div className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6">
             <h2 className="font-display text-2xl font-bold text-white">
               Data Retained &amp; Expected Timeframe
             </h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#B4BCCE]">
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--site-muted)]">
               <li>
                 <strong>Security &amp; Anti-Cheat Records:</strong> Minimal non-playable security or abuse-prevention records (such as ban enforcement or server error logs) may be retained temporarily where necessary to protect multiplayer fairness or comply with legal obligations.
               </li>
@@ -384,12 +384,12 @@ export function DeleteAccountPage() {
           </div>
         </section>
 
-        <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-[#94A3B8]">
-          <Link to="/privacy" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">
+        <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-[var(--site-muted)]">
+          <Link to="/privacy" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">
             Read Full Privacy Policy
           </Link>
           <span aria-hidden="true">·</span>
-          <Link to="/support" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">
+          <Link to="/support" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">
             Visit Player Support
           </Link>
         </div>

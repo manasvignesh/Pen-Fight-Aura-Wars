@@ -87,19 +87,19 @@ export function SupportPage() {
       }}
     >
       <div className="mx-auto max-w-[1100px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <header className="max-w-3xl border-b border-white/[0.08] pb-8">
-          <p className="text-sm font-medium text-[#60A5FA]">Official Help Center</p>
+        <header className="page-masthead textile-section">
+          <p className="text-sm font-medium text-[var(--site-accent)]">Official Help Center</p>
           <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             Player Support
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-[#B4BCCE]">
+          <p className="mt-4 text-base leading-relaxed text-[var(--site-muted)]">
             Having trouble signing in, installing the official APK, or reporting a gameplay bug? Review the troubleshooting guides below or reach our support inbox directly.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-4">
             <a
               href={`mailto:${siteConfig.supportEmail}?subject=${encodeURIComponent('Pen Fight Aura Wars Support Request')}`}
-              className="inline-flex min-h-[46px] items-center gap-2 rounded-lg bg-[#2563EB] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#3B82F6]"
+              className="inline-flex min-h-[46px] items-center gap-2 rounded-lg bg-[var(--site-accent)] px-5 py-2.5 text-sm font-semibold text-[#241b1a] transition-colors hover:bg-[#ffe1b3]"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               <span>Email {siteConfig.supportEmail}</span>
@@ -122,12 +122,12 @@ export function SupportPage() {
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-            <article className="rounded-xl border border-white/10 bg-[#11151F] p-6">
-              <p className="text-xs font-medium text-[#60A5FA]">Account &amp; Authentication</p>
+            <article className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6">
+              <p className="text-xs font-medium text-[var(--site-accent)]">Account &amp; Authentication</p>
               <h3 className="mt-1.5 text-lg font-semibold text-white">
                 Google Sign-In &amp; Account Access Issues
               </h3>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#B4BCCE]">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--site-muted)]">
                 <li>Confirm your device runs an up-to-date version of Google Play Services.</li>
                 <li>Verify your Android date and time are set to automatic network time.</li>
                 <li>
@@ -137,12 +137,12 @@ export function SupportPage() {
               </ul>
             </article>
 
-            <article className="rounded-xl border border-white/10 bg-[#11151F] p-6">
+            <article className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6">
               <p className="text-xs font-medium text-[#A78BFA]">Online 1v1 Connectivity</p>
               <h3 className="mt-1.5 text-lg font-semibold text-white">
                 Multiplayer Connection Troubleshooting
               </h3>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>
                   Check whether Online 1v1 is currently live on production servers (status:{' '}
                   <strong className="text-white">
@@ -156,29 +156,29 @@ export function SupportPage() {
               </ul>
             </article>
 
-            <article className="rounded-xl border border-white/10 bg-[#11151F] p-6">
+            <article className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6">
               <p className="text-xs font-medium text-[#EAB308]">Direct Android Package</p>
               <h3 className="mt-1.5 text-lg font-semibold text-white">APK Installation Help</h3>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>Verify your device meets the minimum supported Android version listed on the Downloads page.</li>
-                <li>Compare the file&apos;s SHA-256 hash against the hash published on <Link to="/download" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">/download</Link>.</li>
+                <li>Compare the file&apos;s SHA-256 hash against the hash published on <Link to="/download" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">/download</Link>.</li>
                 <li>If Android reports &ldquo;App not installed,&rdquo; ensure you have enough free storage and remove any older debug/test build with a conflicting signature first.</li>
                 <li>Never disable Google Play Protect—only allow temporary installation from your browser or Files app.</li>
               </ul>
             </article>
 
-            <article className="rounded-xl border border-white/10 bg-[#11151F] p-6">
-              <p className="text-xs font-medium text-[#60A5FA]">Privacy &amp; AdMob</p>
+            <article className="rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6">
+              <p className="text-xs font-medium text-[var(--site-accent)]">Privacy &amp; AdMob</p>
               <h3 className="mt-1.5 text-lg font-semibold text-white">
                 Advertising &amp; Privacy Questions
               </h3>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-[#B4BCCE]">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--site-muted)]">
                 <li>
-                  Read our full <Link to="/privacy" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">Privacy Policy</Link> for details on Google Sign-In, Supabase, Render, and Google AdMob data handling.
+                  Read our full <Link to="/privacy" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">Privacy Policy</Link> for details on Google Sign-In, Supabase, Render, and Google AdMob data handling.
                 </li>
                 <li>Manage ad personalization or reset your Advertising ID in Android Settings → Google → Ads.</li>
                 <li>
-                  Need permanent account and cloud data deletion? Visit <Link to="/delete-account" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">/delete-account</Link>.
+                  Need permanent account and cloud data deletion? Visit <Link to="/delete-account" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">/delete-account</Link>.
                 </li>
               </ul>
             </article>
@@ -189,12 +189,12 @@ export function SupportPage() {
         <section
           id="bug-report"
           aria-labelledby="bug-report-heading"
-          className="mt-14 rounded-xl border border-white/10 bg-[#11151F] p-6 sm:p-8"
+          className="mt-14 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-6 sm:p-8"
         >
           <h2 id="bug-report-heading" className="font-display text-3xl font-bold text-white">
             Report a Bug or Send a Support Email
           </h2>
-          <p className="mt-2 text-sm leading-relaxed text-[#94A3B8]">
+          <p className="mt-2 text-sm leading-relaxed text-[var(--site-muted)]">
             Because this official website runs as a static site without a third-party ticket tracker, this form validates your report locally and opens a pre-filled <code className="font-mono text-xs">mailto:</code> email directly to{' '}
             <strong className="text-[#E2E8F0]">{siteConfig.supportEmail}</strong>.
           </p>
@@ -209,7 +209,7 @@ export function SupportPage() {
                   id="support-category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white focus:border-[var(--site-accent)] focus:outline-none"
                 >
                   {SUPPORT_CATEGORIES.map((item) => (
                     <option key={item} value={item}>
@@ -232,7 +232,7 @@ export function SupportPage() {
                   placeholder="you@example.com"
                   aria-invalid={Boolean(errors.contactEmail)}
                   aria-describedby={errors.contactEmail ? 'support-email-error' : undefined}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
                 {errors.contactEmail && (
                   <p id="support-email-error" className="mt-1.5 text-xs text-red-300">
@@ -253,7 +253,7 @@ export function SupportPage() {
                   value={deviceModel}
                   onChange={(e) => setDeviceModel(e.target.value)}
                   placeholder="e.g., Pixel 8, Galaxy A54"
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
               </div>
 
@@ -267,7 +267,7 @@ export function SupportPage() {
                   value={androidVersion}
                   onChange={(e) => setAndroidVersion(e.target.value)}
                   placeholder="e.g., Android 14"
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
               </div>
 
@@ -281,7 +281,7 @@ export function SupportPage() {
                   value={appVersion}
                   onChange={(e) => setAppVersion(e.target.value)}
                   placeholder="e.g., v1.0.0"
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 font-mono text-sm text-white placeholder:font-sans placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 font-mono text-sm text-white placeholder:font-sans placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
                 />
               </div>
             </div>
@@ -299,7 +299,7 @@ export function SupportPage() {
                 placeholder="Describe what mode you were playing, what you expected to happen, and any error message shown..."
                 aria-invalid={Boolean(errors.details)}
                 aria-describedby={errors.details ? 'support-details-error' : undefined}
-                className="mt-2 w-full rounded-lg border border-white/15 bg-[#090B10] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[#3B82F6] focus:outline-none"
+                className="mt-2 w-full rounded-lg border border-white/15 bg-[var(--site-ink)] px-3.5 py-2.5 text-sm text-white placeholder:text-[#64748B] focus:border-[var(--site-accent)] focus:outline-none"
               />
               {errors.details && (
                 <p id="support-details-error" className="mt-1.5 text-xs text-red-300">
@@ -310,7 +310,7 @@ export function SupportPage() {
 
             <button
               type="submit"
-              className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#3B82F6]"
+              className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-lg bg-[var(--site-accent)] px-6 py-2.5 text-sm font-semibold text-[#241b1a] transition-colors hover:bg-[#ffe1b3]"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               <span>Prepare Support Email</span>
@@ -320,16 +320,16 @@ export function SupportPage() {
           {preparedMailto && (
             <div
               role="status"
-              className="mt-6 rounded-xl border border-[#3B82F6]/35 bg-[#131C2E] p-5"
+              className="mt-6 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-5"
             >
               <p className="text-sm font-semibold text-white">Support Email Ready to Send</p>
-              <p className="mt-1.5 text-xs text-[#CBD5E1]">
+              <p className="mt-1.5 text-xs text-[var(--site-muted)]">
                 Open your email app to send this message to {siteConfig.supportEmail}, or copy the structured summary below.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
                   href={preparedMailto}
-                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#3B82F6]"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-[var(--site-accent)] px-5 py-2.5 text-sm font-semibold text-[#241b1a] transition-colors hover:bg-[#ffe1b3]"
                 >
                   <Mail className="h-4 w-4" aria-hidden="true" />
                   <span>Open Email Client</span>
@@ -341,7 +341,7 @@ export function SupportPage() {
                 >
                   {copiedTicket ? (
                     <>
-                      <Check className="h-4 w-4 text-[#60A5FA]" aria-hidden="true" />
+                      <Check className="h-4 w-4 text-[var(--site-accent)]" aria-hidden="true" />
                       <span>Copied Ticket Summary</span>
                     </>
                   ) : (
@@ -362,7 +362,7 @@ export function SupportPage() {
             Frequently Asked Questions
           </h2>
 
-          <div className="mt-6 divide-y divide-white/[0.08] overflow-hidden rounded-xl border border-white/10 bg-[#11151F]">
+          <div className="mt-6 divide-y divide-white/[0.08] overflow-hidden rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)]">
             {SUPPORT_FAQS.map((faq) => {
               const isOpen = openFaqId === faq.id;
               return (
@@ -375,13 +375,13 @@ export function SupportPage() {
                     className="flex min-h-[56px] w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-white/[0.03]"
                   >
                     <span>
-                      <span className="block text-xs text-[#94A3B8]">{faq.category}</span>
+                      <span className="block text-xs text-[var(--site-muted)]">{faq.category}</span>
                       <span className="mt-0.5 block text-sm font-semibold text-white sm:text-base">
                         {faq.question}
                       </span>
                     </span>
                     <ChevronDown
-                      className={`h-5 w-5 shrink-0 text-[#94A3B8] transition-transform duration-150 ${
+                      className={`h-5 w-5 shrink-0 text-[var(--site-muted)] transition-transform duration-150 ${
                         isOpen ? 'rotate-180 text-white' : ''
                       }`}
                       aria-hidden="true"
@@ -390,7 +390,7 @@ export function SupportPage() {
                   {isOpen && (
                     <div
                       id={`faq-panel-${faq.id}`}
-                      className="px-5 pb-5 text-sm leading-relaxed text-[#CBD5E1]"
+                      className="px-5 pb-5 text-sm leading-relaxed text-[var(--site-muted)]"
                     >
                       {faq.answer}
                     </div>

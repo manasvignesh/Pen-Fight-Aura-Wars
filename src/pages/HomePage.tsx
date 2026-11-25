@@ -1,36 +1,13 @@
-import { ArrowRight, CalendarDays, Swords, Trophy, UsersRound } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowDownRight } from 'lucide-react';
 import { Layout } from '../components/Layout';
 import { DownloadButtons } from '../components/DownloadButtons';
 import { FlickDemo } from '../components/FlickDemo';
+import { DownloadCallout } from '../components/DownloadCallout';
+import { RivalShowcase } from '../components/RivalShowcase';
+import { PlayModes } from '../components/PlayModes';
 import { PenShowcase } from '../components/PenShowcase';
 import { GameplayShowcase } from '../components/GameplayShowcase';
 import BlurText from '../components/react-bits/BlurText';
-import SpotlightCard from '../components/react-bits/SpotlightCard';
-import { siteConfig } from '../config/siteConfig';
-import { HERO_KEY_ART } from '../data/gameContent';
-
-const modes = [
-  {
-    icon: Trophy, title: 'Tournament', label: 'Solo · Offline', accent: 'text-amber-300', glow: 'from-amber-400/15', light: 'rgba(251, 191, 36, 0.24)', layout: 'lg:col-span-2 lg:row-span-2 lg:min-h-[365px]',
-    detail: '24 rivals', description: 'Climb the ladder, earn Aura Points, and unlock pens for tougher matches.',
-  },
-  {
-    icon: Swords, title: 'Ranked 1v1', label: 'Online', accent: 'text-sky-300', glow: 'from-sky-400/15', light: 'rgba(56, 189, 248, 0.24)', layout: '',
-    detail: siteConfig.features.onlineMultiplayerLive ? 'Aura Rating' : 'Currently unavailable',
-    description: siteConfig.features.onlineMultiplayerLive
-      ? 'Bring a pen you own and challenge another player. Both pens use equal physics.'
-      : 'Play Tournament or Pass & Play while ranked matchmaking is unavailable.',
-  },
-  {
-    icon: CalendarDays, title: 'Weekly Tournament', label: 'Solo · Weekly', accent: 'text-emerald-300', glow: 'from-emerald-400/15', light: 'rgba(52, 211, 153, 0.24)', layout: '',
-    detail: '2,500 Aura Points', description: 'Clear three rivals. Win all three matches 2–0 for a 750-point Clean Sweep bonus.',
-  },
-  {
-    icon: UsersRound, title: 'Pass & Play', label: 'Local · Offline', accent: 'text-violet-300', glow: 'from-violet-400/15', light: 'rgba(167, 139, 250, 0.24)', layout: 'lg:col-span-2',
-    detail: 'One phone', description: 'Take turns flicking against a friend on the same device.',
-  },
-] as const;
 
 export function HomePage() {
   return (
@@ -38,60 +15,47 @@ export function HomePage() {
       title: 'Pen Fight Aura Wars — Official Android Game',
       description: 'Flick your pen and knock rivals off the desk. Climb the Tournament ladder, upgrade your pens, or play Ranked 1v1 on Android.',
     }}>
-      <section className="relative isolate overflow-hidden border-b border-white/10">
-        <img src={HERO_KEY_ART} alt="" aria-hidden="true" fetchPriority="high"
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#090B10] via-[#090B10]/94 to-[#090B10]/65" />
-        <div className="mx-auto grid max-w-[1200px] items-center gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[minmax(0,1.03fr)_minmax(0,0.97fr)] lg:py-20">
-          <div>
-            <h1 className="text-xs font-bold uppercase tracking-[0.2em] text-amber-300">Pen Fight Aura Wars</h1>
+      <section className="illustrated-hero textile-section overflow-hidden">
+        <div className="site-editorial-width relative grid items-center gap-7 py-10 sm:py-14 lg:min-h-[590px] lg:grid-cols-[0.93fr_1.07fr] lg:gap-0 lg:py-14">
+          <div className="hero-lettering relative z-10 lg:py-12">
+            <h1 className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--site-accent)] sm:text-sm">Pen Fight Aura Wars</h1>
             <BlurText text="Flick your pen. Knock theirs off the desk."
-              className="mt-3 max-w-2xl font-display text-[clamp(2.65rem,6.5vw,5.5rem)] font-extrabold leading-[0.98] tracking-tight text-white"
-              delay={38} direction="bottom" stepDuration={0.23}
-              animationFrom={{ filter: 'blur(5px)', opacity: 0, y: 12 }} />
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-slate-200 sm:text-lg">
-              The classroom desk duel, on Android. Pull back to aim, release to flick, and win the round by knocking your rival off the edge.
+              className="mt-3 max-w-2xl font-display text-[clamp(2.9rem,6.9vw,6.25rem)] font-extrabold leading-[0.88] tracking-tight text-[var(--site-text)]"
+              delay={22} direction="bottom" stepDuration={0.16}
+              animationFrom={{ filter: 'blur(1.5px)', opacity: 0.72, y: 6 }}
+              animationTo={[{ filter: 'blur(0px)', opacity: 1, y: 0 }]} />
+            <p className="mt-5 max-w-[40ch] text-base leading-relaxed text-[var(--site-muted)] sm:text-lg">
+              A school-desk game of aim, timing, and one good flick. Play solo, face a ranked rival, or pass the phone to a friend.
             </p>
             <div className="mt-6"><DownloadButtons /></div>
+          </div>
+          <figure className="hero-art-frame relative isolate overflow-hidden" aria-label="Illustrated Tournament scene">
+            <img src="/media/illustrations/classroom-match.webp" alt="Meera lines up a flick with her green highlighter across a school desk"
+              width={1440} height={960} fetchPriority="high" className="h-full w-full object-cover object-[64%_50%]" />
+          </figure>
+        </div>
+      </section>
+
+      <section id="practice" aria-labelledby="practice-heading" className="game-section textile-section practice-section">
+        <div className="site-editorial-width grid items-center gap-7 lg:grid-cols-[0.74fr_1.26fr] lg:gap-14">
+          <div>
+            <h2 id="practice-heading" className="editorial-heading">Take one shot</h2>
+            <p className="mt-4 max-w-[35ch] text-base leading-relaxed text-[var(--site-muted)]">
+              Pull the blue pen away from your rival, aim with the dotted line, and release.
+            </p>
+            <a href="#features" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--site-accent)] hover:text-white">
+              Explore the game modes <ArrowDownRight className="size-4" aria-hidden="true" />
+            </a>
           </div>
           <FlickDemo />
         </div>
       </section>
 
-      <div className="classroom-gutters">
-        <section id="features" aria-labelledby="features-heading" className="desk-grain-surface scroll-mt-20 border-b border-white/10 py-14 sm:py-20">
-          <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-            <h2 id="features-heading" className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">Pick your fight</h2>
-            <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-              {modes.map(({ icon: Icon, title, label, accent, glow, light, layout, detail, description }, index) => (
-                <SpotlightCard key={title} spotlightColor={light} className={`flex flex-col rounded-2xl border border-white/10 bg-[#101620] p-5 sm:p-6 ${accent} ${layout}`}>
-                  <div className={`pointer-events-none absolute inset-0 -z-10 bg-linear-to-bl ${glow} via-transparent to-transparent`} aria-hidden="true" />
-                  <Icon className={`pointer-events-none absolute -top-2 right-0 -z-10 size-28 rotate-12 opacity-[0.08] ${index === 0 ? "lg:-right-7 lg:size-72" : ""}`} strokeWidth={1.1} aria-hidden="true" />
-                  <div className="flex items-center gap-2">
-                    <Icon className="size-4 shrink-0" aria-hidden="true" />
-                    <span className="text-xs font-semibold tracking-wide">{label}</span>
-                  </div>
-                  <h3 className={`mt-2 font-display text-3xl font-bold leading-none text-white sm:text-4xl ${index === 0 ? "lg:mt-4 lg:text-6xl" : ""}`}>{title}</h3>
-                  <p className="mb-4 mt-3 max-w-sm text-sm leading-relaxed text-slate-300">{description}</p>
-                  <p className={`mt-auto border-t border-white/10 pt-3 font-bold ${index === 0 ? "font-display text-3xl leading-none lg:text-5xl" : "text-sm"}`}>{detail}</p>
-                </SpotlightCard>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <GameplayShowcase />
-        <PenShowcase />
-      </div>
-
-      <section className="border-t border-white/10 bg-[#090B10] px-5 py-12 sm:px-8">
-        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4">
-          <h2 className="font-display text-2xl font-bold text-white">Ready for your first flick?</h2>
-          <Link to="/download" className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 hover:bg-amber-200">
-            Get the game <ArrowRight className="size-4" aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
+      <PlayModes />
+      <RivalShowcase />
+      <GameplayShowcase />
+      <PenShowcase />
+      <DownloadCallout />
     </Layout>
   );
 }

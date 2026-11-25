@@ -27,12 +27,12 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 h-16 border-b border-white/[0.08] bg-[#090B10]/92 backdrop-blur-md">
-      <div className="mx-auto flex h-full max-w-[1200px] items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 h-16 border-b border-[var(--site-rule)] bg-[#1c1b29]/95 backdrop-blur-md">
+      <div className="site-editorial-width flex h-full items-center justify-between gap-5">
         {/* Zone 1: Single-line Brand Wordmark */}
         <Link
           to="/"
-          className="font-display text-2xl font-bold tracking-tight text-white transition-colors hover:text-[#60A5FA] whitespace-nowrap shrink-0"
+          className="font-display text-2xl font-bold tracking-tight text-[var(--site-text)] transition-colors hover:text-[var(--site-accent)] whitespace-nowrap shrink-0"
         >
           {siteConfig.appName}
         </Link>
@@ -51,7 +51,7 @@ export function Navbar() {
                 aria-current={active ? 'page' : undefined}
                 className={`relative py-1 whitespace-nowrap shrink-0 transition-colors duration-150 ${
                   active
-                    ? 'text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-[#3B82F6]'
+                    ? 'text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-[var(--site-accent)]'
                     : 'hover:text-white'
                 }`}
               >
@@ -65,7 +65,7 @@ export function Navbar() {
         <div className="flex items-center gap-3 shrink-0">
           <Link
             to="/download"
-            className="hidden sm:inline-flex items-center justify-center rounded-lg bg-[#FACC15] px-4 py-2 text-sm font-bold text-slate-950 transition-colors duration-150 hover:bg-amber-200 whitespace-nowrap shrink-0"
+            className="site-primary-action nav-download hidden sm:inline-flex whitespace-nowrap shrink-0"
           >
             Get the Game
           </Link>
@@ -88,7 +88,7 @@ export function Navbar() {
         <nav
           id="mobile-navigation-drawer"
           aria-label="Mobile navigation"
-          className="border-b border-white/10 bg-[#0D1017] px-4 pb-5 pt-3 lg:hidden"
+          className="border-b border-[var(--site-rule)] bg-[var(--site-panel)] px-4 pb-5 pt-3 lg:hidden"
         >
           <div className="flex flex-col space-y-1">
             {NAV_ITEMS.map((item) => {
@@ -111,7 +111,7 @@ export function Navbar() {
             <div className="pt-2">
               <Link
                 to="/download"
-                className="flex min-h-[44px] w-full items-center justify-center rounded-lg bg-[#2563EB] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#3B82F6]"
+                className="site-primary-action w-full"
               >
                 Get the Game
               </Link>

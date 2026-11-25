@@ -8,84 +8,86 @@ const starter = COLLECTIBLE_PENS[0];
 export function PenShowcase() {
   const [activePen, setActivePen] = useState(starter);
   const [test, setTest] = useState(0);
-  const slideDirection = activePen.impactResistance > starter.impactResistance ? "less" : "farther";
+  const slideDirection = activePen.impactResistance > starter.impactResistance ? 'less' : 'farther';
+  const scores = [
+    ['Stability', activePen.attributes.weight],
+    ['Control', activePen.attributes.control],
+    ['Impact', activePen.attributes.impact],
+  ] as const;
 
   return (
-    <section id="pens" aria-labelledby="pens-heading" className="scroll-mt-20 border-t border-white/10 py-14 sm:py-20">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-        <h2 id="pens-heading" className="font-display text-5xl font-bold tracking-tight text-white sm:text-6xl">Pen Garage</h2>
-        <p className="mt-3 max-w-xl leading-relaxed text-slate-300">Choose a pen to see how it handles and what you’ll need to unlock it in Tournament.</p>
-        <div className="mt-7 grid items-start gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-7">
-          <div role="group" aria-label="Choose a pen" className="grid min-w-0 grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-2">
-            {COLLECTIBLE_PENS.map((pen) => (
-              <button key={pen.id} type="button" aria-pressed={pen.id === activePen.id} aria-controls="garage-profile"
-                onClick={() => { setActivePen(pen); setTest(0); }}
-                className={`min-w-0 rounded-xl border px-2 py-2.5 text-left transition-colors sm:px-3 ${pen.id === activePen.id
-                  ? 'border-sky-300/55 bg-sky-400/10 text-sky-100'
-                  : 'border-white/10 bg-[#11151F] text-slate-200 hover:border-white/30'}`}>
-                <img alt="" src={`/pens/${pen.id}.webp`} width={600} height={174} loading="lazy" className="h-auto w-full" />
-                <span className="mt-0.5 block text-xs font-semibold sm:text-sm">{pen.name}</span>
-              </button>
-            ))}
-          </div>
-          <div id="garage-profile" className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-[#11151F]"
-            style={{ '--pen-accent': activePen.accentHex } as CSSProperties}>
-            <div className="garage-stage grid min-h-44 place-items-center border-b border-white/10 px-5 py-3 sm:min-h-56">
+    <section id="pens" aria-labelledby="pens-heading" className="game-section textile-section poster-catalog">
+      <div className="site-editorial-width">
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+          <h2 id="pens-heading" className="editorial-heading">Pen Garage</h2>
+          <p className="max-w-[32ch] pb-1 text-sm leading-relaxed text-[var(--site-muted)] sm:text-base">
+            Six pens, each with its own handling and Tournament unlock.
+          </p>
+        </div>
+        <div role="group" aria-label="Choose a pen" className="mt-7 grid grid-cols-3 gap-2 sm:mt-9 lg:grid-cols-6">
+          {COLLECTIBLE_PENS.map((pen) => (
+            <button key={pen.id} type="button" aria-pressed={pen.id === activePen.id} aria-controls="garage-profile"
+              onClick={() => { setActivePen(pen); setTest(0); }}
+              className="game-selector min-w-0 px-2 pb-3 pt-2 text-center text-[11px] font-bold sm:px-3 sm:text-sm"
+              style={{ '--pen-accent': pen.accentHex } as CSSProperties}>
+              <img alt="" src={`/pens/${pen.id}.webp`} width={600} height={174} loading="lazy" className="mx-auto mb-1 h-auto w-full max-w-32" />
+              {pen.name}
+            </button>
+          ))}
+        </div>
+        <div id="garage-profile" className="game-frame mt-3 grid min-w-0 overflow-hidden lg:grid-cols-[1.15fr_0.85fr]"
+          style={{ '--pen-accent': activePen.accentHex } as CSSProperties}>
+          <div className="garage-catalog-stage relative isolate grid min-h-52 place-items-center overflow-hidden px-6 py-10 sm:min-h-80 lg:min-h-[340px]">
+            <div key={activePen.id} className="editorial-reveal w-full">
               <TiltedCard src={`/pens/${activePen.id}.webp`} alt={activePen.name} />
             </div>
-            <div className="p-4 sm:p-6">
-              <div aria-live="polite">
-                <p className="text-xs font-semibold text-slate-300">{activePen.archetype}</p>
-                <h3 className="mt-1 font-display text-4xl font-bold leading-none text-white">{activePen.name}</h3>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-300">{activePen.handlingSummary}</p>
-                <p className="mt-4 flex items-start gap-2 text-sm text-amber-100">
-                  <LockKeyhole className="mt-0.5 size-4 shrink-0" aria-hidden="true" />{activePen.unlockPath}
-                </p>
-              </div>
-              <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4" aria-label="Illustrative handling ratings">
-                {([
-                  ['Stability', activePen.attributes.weight],
-                  ['Control', activePen.attributes.control],
-                  ['Impact', activePen.attributes.impact],
-                ] as const).map(([label, value]) => (
-                  <div key={label}>
-                    <div className="flex flex-wrap items-end justify-between gap-x-1 text-xs text-slate-300">
-                      <span>{label}</span><span className="font-mono">{value}</span>
-                    </div>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
-                      <div className="h-full rounded-full bg-[var(--pen-accent)] motion-safe:transition-[width]" style={{ width: `${value}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-5 rounded-xl border border-white/10 bg-[#0B111B] p-3 sm:p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div>
-                    <h4 className="text-sm font-bold text-white">Same hit, different slide</h4>
-                    <p className="mt-1 text-xs text-slate-300">Illustrative stability comparison with the starter.</p>
-                  </div>
-                  <button type="button" onClick={() => setTest(test + 1)}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-sky-200/25 px-3 text-xs font-semibold text-sky-100 hover:bg-sky-300/10">
-                    {test ? 'Replay hit' : 'Test the hit'}<ArrowRight className="size-3.5" aria-hidden="true" />
-                  </button>
-                </div>
-                <div key={test} className="mt-3 space-y-2" aria-hidden="true">
-                  {[starter, activePen].map((pen, index) => {
-                    const slide = 44 / pen.impactResistance;
-                    return (
-                      <div key={index} className="relative h-6 overflow-hidden rounded-md border border-white/10 bg-white/[0.04]">
-                        <span className="absolute inset-y-0 left-2 flex items-center text-[10px] text-slate-300">{index === 0 ? 'Starter' : 'Selected'}</span>
-                        <span className={`garage-test-pen absolute left-[27%] top-[calc(50%-3px)] h-1.5 w-[14%] rounded-full ${test ? 'garage-test-slide' : ''}`}
-                          style={{ backgroundColor: pen.accentHex, '--slide-distance': `${slide / 0.14}%` } as CSSProperties} />
-                      </div>
-                    );
-                  })}
-                </div>
-                <p role="status" className="mt-2 min-h-4 text-xs text-slate-300">
-                  {test > 0 && (activePen.id === starter.id ? 'Both runs show the same starter pen. Select another pen to compare.' : `${activePen.name} slides ${slideDirection} under the same hit.`)}
-                </p>
-              </div>
+          </div>
+          <div className="min-w-0 p-5 sm:p-7 lg:border-l lg:border-[var(--site-rule)]">
+            <div aria-live="polite">
+              <p className="text-sm font-bold text-[var(--site-accent)]">{activePen.archetype}</p>
+              <h3 className="mt-1 font-display text-[clamp(3rem,5vw,4.75rem)] font-extrabold leading-[0.9] tracking-tight">{activePen.name}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-[var(--site-muted)] sm:text-base">{activePen.handlingSummary}</p>
+              <p className="mt-4 flex items-start gap-2 text-sm font-semibold text-[var(--site-text)]">
+                <LockKeyhole className="mt-0.5 size-4 shrink-0" aria-hidden="true" />{activePen.unlockPath}
+              </p>
             </div>
+            <div className="mt-5 grid grid-cols-3 border-y border-[var(--site-rule)]" aria-label="Illustrative handling ratings">
+              {scores.map(([label, value]) => (
+                <div key={label} className="border-r border-[var(--site-rule)] px-2 py-3 first:pl-0 last:border-r-0 sm:px-4">
+                  <p className="font-display text-3xl font-bold leading-none sm:text-4xl">{value}</p>
+                  <p className="mt-1 text-xs font-semibold text-[var(--site-muted)]">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-7 grid items-center gap-5 border-y border-[var(--site-rule)] py-5 lg:mt-10 lg:grid-cols-[1fr_1.15fr] lg:gap-12">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h4 className="font-display text-2xl font-bold leading-none sm:text-3xl">Same hit, different slide.</h4>
+              <p className="mt-1.5 text-xs text-[var(--site-muted)]">An illustrative comparison with the starter pen.</p>
+            </div>
+            <button type="button" onClick={() => setTest((previous) => previous + 1)}
+              className="inline-flex min-h-11 items-center gap-2 rounded-md border border-[var(--site-rule)] px-3 text-xs font-bold hover:bg-white/10 hover:text-white">
+              {test ? 'Replay hit' : 'Test the hit'}<ArrowRight className="size-3.5" aria-hidden="true" />
+            </button>
+          </div>
+          <div>
+            <div key={test} className="space-y-2" aria-hidden="true">
+              {[starter, activePen].map((pen, index) => {
+                const slide = 44 / pen.impactResistance;
+                return (
+                  <div key={index} className="relative h-6 overflow-hidden border-b border-[var(--site-rule)] bg-white/[0.05]">
+                    <span className="absolute inset-y-0 left-2 flex items-center text-[10px] font-semibold text-[var(--site-muted)]">{index === 0 ? 'Starter' : 'Selected'}</span>
+                    <span className={`absolute left-[28%] top-[calc(50%-3px)] h-1.5 w-[14%] rounded-full ${test ? 'garage-test-slide' : ''}`}
+                      style={{ backgroundColor: pen.accentHex, '--slide-distance': `${slide / 0.14}%` } as CSSProperties} />
+                  </div>
+                );
+              })}
+            </div>
+            <p role="status" className="mt-2 min-h-4 text-xs text-[var(--site-muted)]">
+              {test > 0 && (activePen.id === starter.id ? 'Select another pen to compare it with the starter.' : `${activePen.name} slides ${slideDirection} under the same hit.`)}
+            </p>
           </div>
         </div>
       </div>

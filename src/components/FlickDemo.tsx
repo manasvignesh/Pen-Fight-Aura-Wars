@@ -137,21 +137,20 @@ export function FlickDemo() {
   const aim = pull && power > 3 ? { x: pull.x / power, y: pull.y / power } : null;
 
   return (
-    <div className="min-w-0 rounded-2xl border border-amber-200/20 bg-[#10151E] p-3 shadow-2xl sm:p-4" aria-labelledby="flick-title">
+    <div className="practice-console min-w-0 rounded-xl border p-3 shadow-2xl sm:p-4" aria-labelledby="flick-title">
       <div className="flex items-center justify-between gap-2 px-1 pb-3">
         <h2 id="flick-title" className="font-display text-2xl font-bold text-white">Try a flick</h2>
         <span className="text-xs font-medium text-slate-300">One-shot practice</span>
       </div>
-      <div ref={board} className="relative aspect-[22/15] isolate select-none overflow-hidden rounded-xl bg-[#080C13]">
-        <div aria-hidden="true" className="flick-desk absolute inset-[9%_6%_8%] rounded-md border-2 border-[#A26B43] shadow-[0_5px_0_#432B21,0_8px_16px_#0009]" />
-        <span className="pointer-events-none absolute left-[8%] top-[12%] text-[10px] font-semibold text-amber-100/85">Desk edge</span>
+      <div ref={board} className="practice-arena relative isolate aspect-[22/15] select-none overflow-hidden rounded-lg">
+        <div aria-hidden="true" className="flick-desk absolute inset-[9%_6%_8%]" />
         {aim && Array.from({ length: 13 }, (_, i) => {
           const point = add(playerStart, aim, 31 + i * 15);
           return leavesDesk(point) ? null : <span key={i} aria-hidden="true" style={position(point)}
             className={`absolute size-1 -translate-1/2 rounded-full ${power * 3.5 > i * 15 ? 'bg-amber-200' : 'bg-white/35'}`} />;
         })}
-        <img aria-hidden="true" alt="" draggable={false} src="/pens/chunky-marker.webp"
-          className={`pointer-events-none absolute z-10 w-[26%] -translate-1/2 rotate-[19deg] ${leavesDesk(rival) ? 'scale-50 opacity-25' : ''}`}
+        <img aria-hidden="true" alt="" draggable={false} src="/media/illustrations/practice-rival.webp" width={600} height={210}
+          className={`practice-pen-sprite pointer-events-none absolute z-10 w-[26%] -translate-1/2 rotate-[19deg] ${leavesDesk(rival) ? 'scale-50 opacity-25' : ''}`}
           style={position(rival)} />
         <div onPointerDown={startDrag} onPointerMove={(event) => {
           if (pointer.current?.id === event.pointerId) setPull(getPull(event));
@@ -160,9 +159,9 @@ export function FlickDemo() {
           aria-hidden="true"
           className={`absolute z-20 grid h-[23%] w-[28%] -translate-1/2 touch-none place-items-center ${phase === 'ready' ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none'} ${leavesDesk(player) ? 'scale-50 opacity-25' : ''}`}
           style={position(player)}>
-          <img alt="" src="/pens/classic-ballpoint.webp" draggable={false} className="pointer-events-none w-full -rotate-[23deg] drop-shadow-[0_0_6px_#38bdf890]" />
+          <img alt="" src="/media/illustrations/practice-player.webp" width={600} height={210} draggable={false} className="practice-pen-sprite pointer-events-none w-full -rotate-[23deg]" />
         </div>
-        {phase === 'ready' && <span className="pointer-events-none absolute z-20 -translate-x-1/2 text-[10px] font-bold text-sky-100"
+        {phase === 'ready' && <span className="pointer-events-none absolute z-20 -translate-x-1/2 text-[10px] font-bold text-[var(--site-text)]"
           style={position({ x: playerStart.x, y: playerStart.y + 27 })}>Your pen</span>}
         {!reducedMotion && impact && <ClickSpark x={impact.x / width * 100} y={impact.y / height * 100} />}
       </div>
@@ -171,7 +170,7 @@ export function FlickDemo() {
       </p>
       <div className="flex flex-wrap items-center gap-2 px-1 pb-0.5">
         <button type="button" aria-disabled={phase === 'moving'} onClick={() => phase === 'finished' ? reset() : shoot({ x: 57, y: -31 })}
-          className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-sky-300/30 bg-sky-300/10 px-3 text-xs font-bold text-sky-100 hover:bg-sky-300/20 aria-disabled:opacity-50">
+          className="site-secondary-action flick-action aria-disabled:opacity-50">
           {phase === 'finished' ? <RotateCcw className="size-3.5" aria-hidden="true" /> : <ArrowUpRight className="size-3.5" aria-hidden="true" />}
           {phase === 'finished' ? 'Try again' : 'Flick straight'}
         </button>

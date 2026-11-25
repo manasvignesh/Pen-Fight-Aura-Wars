@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowDownToLine, Copy, ExternalLink, LifeBuoy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Layout } from '../components/Layout';
+import StarBorder from '../components/react-bits/StarBorder';
 import { siteConfig } from '../config/siteConfig';
 
 export function DownloadPage() {
@@ -24,14 +25,14 @@ export function DownloadPage() {
       description: 'Get the official Pen Fight Aura Wars Android release, check the APK checksum, and find installation help.',
     }}>
       <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
-        <header className="max-w-2xl">
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Download Pen Fight Aura Wars</h1>
-          <p className="mt-3 text-base text-slate-300">
+        <header className="download-page-heading textile-section game-frame px-5 sm:px-8">
+          <h1 className="max-w-[17ch] font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Download Pen Fight Aura Wars</h1>
+          <p className="mt-3 max-w-[48ch] text-base text-slate-300">
             {playStore.isLive ? 'Use Google Play for automatic updates. The official APK is also available for direct installation.' : 'Get the signed Android APK directly from the official website.'}
           </p>
         </header>
 
-        <section id="google-play" aria-labelledby="google-play-heading" className={playStore.isLive ? 'mt-7 scroll-mt-20 rounded-xl border border-white/10 bg-[#11151F] p-5' : 'sr-only'}>
+        <section id="google-play" aria-labelledby="google-play-heading" className={playStore.isLive ? 'mt-7 scroll-mt-20 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-5' : 'sr-only'}>
           <h2 id="google-play-heading" className="font-display text-xl font-bold text-white">Google Play</h2>
           {playStore.isLive && playStore.href ? (
             <a href={playStore.href} target="_blank" rel="noopener noreferrer"
@@ -41,7 +42,7 @@ export function DownloadPage() {
           ) : <p>Public Google Play availability has not been confirmed.</p>}
         </section>
 
-        <section id="apk" aria-labelledby="apk-heading" className="mt-7 scroll-mt-20 rounded-xl border border-white/10 bg-[#11151F] p-5 sm:p-7">
+        <section id="apk" aria-labelledby="apk-heading" className="mt-7 scroll-mt-20 rounded-xl border border-[var(--site-rule)] bg-[var(--site-panel)] p-5 sm:p-7">
           <h2 id="apk-heading" className="font-display text-2xl font-bold text-white">Official Android APK</h2>
           <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-300">
             {apk.version && <span>Version {apk.version}</span>}
@@ -49,22 +50,26 @@ export function DownloadPage() {
             {apk.minAndroidVersion && <span>{apk.minAndroidVersion} or newer</span>}
           </div>
           {apk.isAvailable && apk.url ? (
-            <a href={apk.url} download
-              className={`mt-5 inline-flex min-h-12 items-center gap-2 rounded-lg px-5 py-2 text-sm font-bold ${playStore.isLive ? 'border border-white/15 text-white hover:bg-white/10' : 'bg-amber-300 text-slate-950 hover:bg-amber-200'}`}>
+            <div className="mt-5">
+              <StarBorder>
+              <a href={apk.url} download
+              className={playStore.isLive ? 'site-secondary-action' : 'site-primary-action'}>
               <ArrowDownToLine className="size-4" aria-hidden="true" /> Download signed APK
-            </a>
+              </a>
+              </StarBorder>
+            </div>
           ) : <p className="mt-5 text-sm text-slate-300">The direct download is temporarily unavailable.</p>}
           {apk.isAvailable && apk.sha256Valid && apk.sha256 && (
             <div className="mt-6 border-t border-white/10 pt-4">
               <div className="flex flex-wrap items-center justify-between gap-1 text-sm text-slate-200">
                 <h3 className="font-semibold">SHA-256 checksum</h3>
                 <button type="button" onClick={() => void copyChecksum()}
-                  className="inline-flex min-h-10 items-center gap-2 rounded-lg px-2 text-sky-200 hover:bg-white/5">
+                  className="inline-flex min-h-10 items-center gap-2 rounded-lg px-2 text-[var(--site-accent)] hover:bg-white/5">
                   <Copy className="size-4" aria-hidden="true" /> Copy checksum
                 </button>
               </div>
               <code className="block break-all font-mono text-xs leading-relaxed text-slate-300">{apk.sha256}</code>
-              <p role="status" className="mt-1 text-xs text-sky-200">{copyStatus}</p>
+              <p role="status" className="mt-1 text-xs text-[var(--site-accent)]">{copyStatus}</p>
             </div>
           )}
         </section>
@@ -84,7 +89,7 @@ export function DownloadPage() {
           <p className="mt-2 text-sm leading-relaxed text-slate-300">Stronger flick, hit, and ring-out vibrations, with an on/off toggle and a vibration test in Settings.</p>
         </section>}
 
-        <Link to="/support" className="mt-6 inline-flex min-h-10 items-center gap-2 rounded-lg text-sm font-semibold text-sky-200 hover:underline">
+        <Link to="/support" className="mt-6 inline-flex min-h-10 items-center gap-2 rounded-lg text-sm font-semibold text-[var(--site-accent)] hover:underline">
           <LifeBuoy className="size-4" aria-hidden="true" /> Get installation help
         </Link>
       </div>

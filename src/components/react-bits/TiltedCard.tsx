@@ -21,7 +21,7 @@ export default function TiltedCard({ src, alt }: { src: string; alt: string }) {
   }
 
   return (
-    <figure ref={figure} onPointerMove={move} onPointerLeave={reset} className="w-full max-w-[510px] [perspective:650px]">
+    <figure ref={figure} onPointerMove={move} onPointerLeave={reset} className="mx-auto w-full max-w-[590px] [perspective:650px]">
       <LazyMotion features={domAnimation}>
         <m.img src={src} alt={alt} width={600} height={174} draggable={false} loading="lazy"
           className="mx-auto h-auto w-full drop-shadow-[0_13px_9px_#0009]" style={reduced ? undefined : { rotateX, rotateY }} />

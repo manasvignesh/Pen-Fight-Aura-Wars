@@ -70,7 +70,7 @@ export function Layout({ meta, children }: LayoutProps) {
   }, [location.pathname, location.hash]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#090B10] text-[#F1F5F9]">
+    <div className="flex min-h-screen flex-col bg-[var(--site-ink)] text-[var(--site-text)]">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[#2563EB] focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
@@ -78,7 +78,7 @@ export function Layout({ meta, children }: LayoutProps) {
         Skip to main content
       </a>
       <Navbar />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className={location.pathname === '/' ? 'flex-1' : 'site-reader textile-section flex-1'}>
         {children}
       </main>
       <Footer />

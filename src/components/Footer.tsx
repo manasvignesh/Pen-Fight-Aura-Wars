@@ -1,130 +1,57 @@
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../config/siteConfig';
 
+const groups = [
+  {
+    title: 'Explore', links: [
+      ['/#features', 'Game modes'], ['/#showcase', 'Gameplay'], ['/#pens', 'Pen Garage'], ['/download', 'Get the game'],
+    ],
+  },
+  {
+    title: 'Player support', links: [
+      ['/support', 'Help center'], ['/support#bug-report', 'Report a bug'], ['/download#install-guide', 'Installation guide'],
+    ],
+  },
+  {
+    title: 'Legal', links: [
+      ['/privacy', 'Privacy policy'], ['/terms', 'Terms of service'], ['/delete-account', 'Delete account'],
+    ],
+  },
+] as const;
+
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/[0.08] bg-[#07090D]">
-      <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
-          {/* Brand Column */}
-          <div className="md:col-span-5">
-            <Link
-              to="/"
-              className="font-display text-2xl font-bold tracking-tight text-white hover:text-[#60A5FA] transition-colors"
-            >
+    <footer className="site-footer textile-section border-t border-[var(--site-rule)] bg-[var(--site-ink)] text-[var(--site-text)]">
+      <div className="site-editorial-width py-12 sm:py-16">
+        <div className="grid gap-x-8 gap-y-9 md:grid-cols-[1.1fr_1.9fr]">
+          <div>
+            <Link to="/" className="inline-block font-display text-4xl font-extrabold leading-none tracking-tight hover:text-[var(--site-accent)] sm:text-5xl">
               {siteConfig.appName}
             </Link>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#94A3B8]">
-              {siteConfig.tagline} Official publisher website for the Android mobile game built for competitive desk pen battles.
-            </p>
-            <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#94A3B8]">
-              <span className="font-mono text-[#CBD5E1]">{siteConfig.packageName}</span>
-              <span aria-hidden="true">·</span>
-              <span>Android</span>
-              <span aria-hidden="true">·</span>
-              <a
-                href={`mailto:${siteConfig.supportEmail}`}
-                className="text-[#CBD5E1] underline decoration-white/20 underline-offset-4 hover:text-white hover:decoration-white/60 transition-colors"
-              >
-                {siteConfig.supportEmail}
-              </a>
-            </div>
+            <p className="mt-3 text-sm text-[#b9bdc6]">The official Android game.</p>
+            <a href={`mailto:${siteConfig.supportEmail}`} className="mt-4 inline-flex min-h-9 items-center text-sm font-semibold text-[#d8d9dc] underline decoration-white/30 underline-offset-4 hover:text-white">
+              Contact support
+            </a>
           </div>
-
-          {/* Game Links */}
-          <div className="md:col-span-2">
-            <h2 className="text-sm font-semibold text-white">Game</h2>
-            <ul className="mt-4 space-y-2.5 text-sm text-[#94A3B8]">
-              <li>
-                <Link to="/#features" className="hover:text-white transition-colors">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link to="/#pens" className="hover:text-white transition-colors">
-                  Collectible Pens
-                </Link>
-              </li>
-              <li>
-                <Link to="/#showcase" className="hover:text-white transition-colors">
-                  Gameplay Showcase
-                </Link>
-              </li>
-              <li>
-                <Link to="/download" className="hover:text-white transition-colors">
-                  Downloads &amp; APK
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Player Support */}
-          <div className="md:col-span-2">
-            <h2 className="text-sm font-semibold text-white">Support</h2>
-            <ul className="mt-4 space-y-2.5 text-sm text-[#94A3B8]">
-              <li>
-                <Link to="/support" className="hover:text-white transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link to="/support#bug-report" className="hover:text-white transition-colors">
-                  Report a Bug
-                </Link>
-              </li>
-              <li>
-                <Link to="/download#install-guide" className="hover:text-white transition-colors">
-                  APK Install Guide
-                </Link>
-              </li>
-              <li>
-                <Link to="/delete-account" className="hover:text-white transition-colors">
-                  Delete Account
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal & Publisher */}
-          <div className="md:col-span-3">
-            <h2 className="text-sm font-semibold text-white">Legal &amp; Publisher</h2>
-            <ul className="mt-4 space-y-2.5 text-sm text-[#94A3B8]">
-              <li>
-                <Link to="/privacy" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="hover:text-white transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link to="/delete-account" className="hover:text-white transition-colors">
-                  Account &amp; Data Deletion
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="/app-ads.txt"
-                  className="font-mono text-xs text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  /app-ads.txt
-                </a>
-              </li>
-            </ul>
-          </div>
+          <nav aria-label="Footer navigation" className="grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3">
+            {groups.map(({ title, links }) => (
+              <div key={title}>
+                <h2 className="text-sm font-bold">{title}</h2>
+                <ul className="mt-2 text-sm text-[#b9bdc6]">
+                  {links.map(([path, label]) => (
+                    <li key={path}><Link to={path} className="inline-flex min-h-9 items-center hover:text-[var(--site-accent)]">{label}</Link></li>
+                  ))}
+                  {title === 'Legal' && <li><a href="/app-ads.txt" className="inline-flex min-h-9 items-center hover:text-[var(--site-accent)]">App ads file</a></li>}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
-
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.08] pt-6 text-xs text-[#94A3B8] sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {siteConfig.publisherName}. All rights reserved.
-          </p>
-          <p>
-            Google Play and the Android logo are trademarks of Google LLC. This website is operated independently by the game publisher.
-          </p>
+        <div className="mt-9 flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-white/15 pt-5 text-xs leading-relaxed text-[#a8acb6]">
+          <p>© {year} {siteConfig.publisherName}.</p>
+          <p>Google Play and the Android logo are trademarks of Google LLC.</p>
         </div>
       </div>
     </footer>

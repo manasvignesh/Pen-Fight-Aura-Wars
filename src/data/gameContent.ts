@@ -20,7 +20,6 @@ export interface SupportFaqItem {
   category: string;
 }
 
-export { default as HERO_KEY_ART } from '../assets/images/hero.webp';
 
 // Impact resistance uses base mass × grip × impact grip from the game.
 export const COLLECTIBLE_PENS: CollectiblePen[] = [

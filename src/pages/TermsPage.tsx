@@ -15,18 +15,18 @@ export function TermsPage() {
       }}
     >
       <div className="mx-auto max-w-[960px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <header className="border-b border-white/[0.08] pb-8">
-          <p className="text-sm font-medium text-[#60A5FA]">Legal Terms</p>
+        <header className="page-masthead textile-section">
+          <p className="text-sm font-medium text-[var(--site-accent)]">Legal Terms</p>
           <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             Terms of Service
           </h1>
-          <p className="mt-3 text-base leading-relaxed text-[#B4BCCE]">
+          <p className="mt-3 text-base leading-relaxed text-[var(--site-muted)]">
             These Terms of Service govern your access to and use of{' '}
             <strong className="text-white">{siteConfig.appName}</strong> (Android package{' '}
             <code className="font-mono text-sm text-[#E2E8F0]">{siteConfig.packageName}</code>) and this official website operated by{' '}
             <strong className="text-white">{siteConfig.publisherName}</strong>.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#94A3B8]">
+          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--site-muted)]">
             <span>
               Effective Date: <span className="text-[#E2E8F0]">{effectiveDate}</span>
             </span>
@@ -37,14 +37,14 @@ export function TermsPage() {
           </div>
         </header>
 
-        <article className="mt-10 space-y-9 text-[15px] leading-relaxed text-[#CBD5E1]">
+        <article className="mt-10 space-y-9 text-[15px] leading-relaxed text-[var(--site-muted)]">
           <section className="space-y-3">
             <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">
               1. Acceptance &amp; Use of the Game
             </h2>
             <p>
               By downloading, installing, or playing {siteConfig.appName}, you agree to these Terms of Service and our{' '}
-              <Link to="/privacy" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">
+              <Link to="/privacy" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">
                 Privacy Policy
               </Link>
               . We grant you a limited, non-exclusive, non-transferable, revocable license to install and play the official Android game for personal, non-commercial entertainment on compatible devices you own or control.
@@ -62,7 +62,7 @@ export function TermsPage() {
               You may request permanent deletion of your game account at any time on our{' '}
               <Link
                 to="/delete-account"
-                className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
               >
                 Account Deletion page
               </Link>
@@ -77,7 +77,7 @@ export function TermsPage() {
             <p>
               Competitive pen battles depend on fair physics and honest skill. You agree not to:
             </p>
-            <ul className="list-disc space-y-2 pl-5 text-[#B4BCCE]">
+            <ul className="list-disc space-y-2 pl-5 text-[var(--site-muted)]">
               <li>Modify, decompile, reverse engineer, or distribute tampered APKs of {siteConfig.appName}.</li>
               <li>Use cheats, memory editors, automated scripts, bots, or exploits to manipulate physics, coins, Aura Rating, or match outcomes.</li>
               <li>Attempt to disrupt, overload, or bypass our server-authoritative multiplayer validation on Render or our Supabase database security rules.</li>
@@ -108,7 +108,7 @@ export function TermsPage() {
             </h2>
             <p>
               {siteConfig.appName} is supported by in-game advertising served via Google AdMob. Third-party advertisers are responsible for the content of their ads and linked external sites. Your interaction with advertisements is governed by the respective advertiser&apos;s terms and privacy policy, as well as the ad-data disclosures in our{' '}
-              <Link to="/privacy" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">
+              <Link to="/privacy" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">
                 Privacy Policy
               </Link>
               .
@@ -159,12 +159,12 @@ export function TermsPage() {
               Questions regarding these Terms of Service can be directed to{' '}
               <a
                 href={`mailto:${siteConfig.supportEmail}`}
-                className="text-[#60A5FA] underline underline-offset-4 hover:text-white"
+                className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white"
               >
                 {siteConfig.supportEmail}
               </a>{' '}
               or via our{' '}
-              <Link to="/support" className="text-[#60A5FA] underline underline-offset-4 hover:text-white">
+              <Link to="/support" className="text-[var(--site-accent)] underline underline-offset-4 hover:text-white">
                 Support page
               </Link>
               .
